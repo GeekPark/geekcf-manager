@@ -1,4 +1,4 @@
-body, pre, input, textarea {
+body, pre, input, textarea, label, select {
     font-family: 'Inconsolata' monospace;
 }
 pre {
@@ -10,7 +10,7 @@ label {
     min-width: 80px;
     display: inline-block;
 }
-input, textarea {
+input, textarea, select {
     font-size: 16px;
     line-height:26px;
 }

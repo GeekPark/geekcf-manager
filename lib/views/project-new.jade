@@ -15,7 +15,9 @@ block content
             input#area(name='area')
         p
             label(for='turn') 融资轮次：
-            input#turn(name='turn')
+            select#turn(name='turn')
+                each value, index in turns
+                    option(value=index)= value + ' 轮'
         p
             label(for='totalValue') 估值：
             input#totalValue(name='totalValue')
@@ -36,9 +38,14 @@ block content
             label(for='closeDate') 结束时间：
             input#closeDate(name='closeDate')
         p
+            资源需求：
             each skill, key in skills
                 input(id='skill#{key}',name='skills',type='checkbox',value='#{key}')
                 label(for='skill#{key}')= skill
+        p
+            label(for='content') 项目介绍：
+        p
+            textarea#content(name='content',cols=50,rows=10)
         p
         input(type='submit',value='SUBMIT')
         a(href='/project') CANCEL
