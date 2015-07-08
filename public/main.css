@@ -1,0 +1,147 @@
+body, pre, input, textarea {
+    font-family: 'Inconsolata' monospace;
+}
+pre {
+    font-family: monospace;
+    font-size: 10px;
+    line-height: 10px;
+}
+label {
+    min-width: 80px;
+    display: inline-block;
+}
+input, textarea {
+    font-size: 16px;
+    line-height:26px;
+}
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+table {
+    border-collapse:collapse;
+}
+th {
+    background-color: #e7e7e7;
+}
+th, td {
+    padding: 2px;
+    border:solid 1px;
+}
+a {
+    padding: 3px;
+    margin: 5px;
+}
+li {
+    margin: 3px 0;
+}
+dt {
+    margin-top: 10px;
+}
+
+/* This button was generated using CSSButtonGenerator.com */
+input[type="submit"], input[type="button"] {
+    background-color:#ededed;
+    text-indent:0px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    color:#777777;
+    height:32px;
+    width:100px;
+    text-shadow:1px 1px 0px #ffffff;
+    outline: none;
+}
+input[type="submit"]:hover, input[type="button"]:hover {
+    background-color:#dfdfdf;
+}
+input[type="submit"]:active, input[type="button"]:active {
+    position:relative;
+    top:1px;
+}
+/* This button was generated using CSSButtonGenerator.com */
+
+#output {
+    min-width: 200px;
+    display: inline-block;
+    font-weight: bold;
+    padding: 2px 5px;
+}
+#main {
+    width: 1400px;
+    margin: 0 auto;
+}
+#menu, #menu li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#menu li {
+    float: left;
+}
+#menu li a {
+    display: inline;
+}
+.num {
+    text-align: right;
+    background-color: #ccc;
+}
+.cloud a {
+    display: inline-block;
+    margin: 3px;
+    padding: 3px;
+}
+.cate span {
+    display: inline-block;
+    min-width: 120px;
+}
+.strong {
+    font-weight: bold;
+}
+.longtd {
+    max-width: 420px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.preview {
+    padding: 3px;
+    float: right;
+    overflow: auto;
+    cursor: move;
+}
+.preview li {
+    width: 1070px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.list {
+    margin: 3px;
+    padding: 5px;
+    width: 680px;
+    float: left;
+    overflow: hidden;
+    border:solid 1px;
+}
+.time {
+    float: right;
+}
+.child {
+    margin-left: 15px;
+}
+.cover {
+    position: relative;
+    left: -30px;
+    font-size: 18px;
+}
+.hide {
+    display: none;
+}
+.copy {
+    text-align: center;
+    padding: 20px 5px 5px;
+}
+.clear {
+    clear: both;
+}

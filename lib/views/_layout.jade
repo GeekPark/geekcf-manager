@@ -1,0 +1,24 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title Manager - qdan.me
+    script(src='/jquery-2.1.1.min.js')
+    script(src='/jquery.cookie.js')
+    script(src='/core.js')
+    script(src='/jquery-ui.min.js')
+    script(src='/jquery.selection.js')
+    link(rel='stylesheet',href='/main.css')
+  body
+    #main
+      h1 Manager - geeks.vc
+      mixin menu(url, title)
+        li: a(href=url)= title
+      ul#menu
+        +menu('/', '首页')
+        +menu('/project', '项目')
+      br.clear
+      block content
+    p.copy
+      | copyright &copy; 2015 
+      a(href="http://geeks.vc/",target="_blank") geeks.vc

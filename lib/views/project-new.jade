@@ -1,0 +1,44 @@
+extends _layout
+
+block content
+    h2
+        | 添加新项目
+    form(action='./',method='POST')
+        p
+            label(for='title') 项目标题：
+            input#title(name='title')
+        p
+            label(for='cover') 封面图片：
+            input#cover(name='cover')
+        p
+            label(for='area') 地区：
+            input#area(name='area')
+        p
+            label(for='turn') 融资轮次：
+            input#turn(name='turn')
+        p
+            label(for='totalValue') 估值：
+            input#totalValue(name='totalValue')
+        p
+            label(for='percent') 出让比例：
+            input#percent(name='percent')
+            span.cover %
+        p
+            label(for='targetValue') 融资金额：
+            input#targetValue(name='targetValue')
+        p
+            label(for='minTarget') 最小额度：
+            input#minTarget(name='minTarget')
+        p
+            label(for='openDate') 开始时间：
+            input#openDate(name='openDate')
+        p
+            label(for='closeDate') 结束时间：
+            input#closeDate(name='closeDate')
+        p
+            each skill, key in skills
+                input(id='skill#{key}',name='skills',type='checkbox',value='#{key}')
+                label(for='skill#{key}')= skill
+        p
+        input(type='submit',value='SUBMIT')
+        a(href='/project') CANCEL
