@@ -51,7 +51,7 @@ function start() {
 
         global.uid = ckuid;
 
-        if(admin.length === 0 || admin.indexOf(ckuid) !== -1) {
+        if(ckuid && (admin.length === 0 || admin.indexOf(ckuid) !== -1)) {
             next();
         } else {
             res.redirect('http://' + app.locals.domain);
