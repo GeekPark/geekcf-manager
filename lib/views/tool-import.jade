@@ -1,0 +1,13 @@
+extends _layout
+
+block content
+    h2
+        | 导入 VIP 数据
+    form(method='POST',enctype='multipart/form-data')
+        p
+            label(for='uploadFile') 选择导入文件
+            input#uploadFile(name='uploadFile',type='file')
+        p
+            input(type='submit',value='IMPORT')
+            a(href='../') CANCEL
+
