@@ -6,5 +6,6 @@ block content
     p
         a(href='/project/new') 添加新项目
         ul
-            each project in projects.length ? projects : ['nothing...']
-                li= project.title || project
+            each project, index in projects.length ? projects : ['nothing...']
+                li= index + 1 + ' : ' + (project.title || project)
+                    a(href='/project/#{project._id}/info') EDIT

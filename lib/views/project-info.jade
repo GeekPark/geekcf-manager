@@ -1,0 +1,60 @@
+extends _layout
+
+block content
+    h2
+        | 修改项目
+    p
+        a(href='info') 基础信息
+        a(href='team') 团队信息
+    form(method='POST')
+        p
+            label(for='title') 项目标题：
+            input#title(name='title',value='#{project.title}')
+        p
+            label(for='cover') 封面图片：
+            input#cover(name='cover',value='#{project.cover}')
+        p
+            label(for='area') 地区：
+            input#area(name='area',value='#{project.area}')
+        p
+            label(for='turn') 融资轮次：
+            select#turn(name='turn')
+                each value, index in turns
+                    option(value=index,selected=index == project.turn && "selected")= value + ' 轮'
+        p
+            label(for='totalValue') 估值：
+            input#totalValue(name='totalValue',value='#{project.totalValue}')
+        p
+            label(for='percent') 出让比例：
+            input#percent(name='percent',value='#{project.percent}')
+            span.cover %
+        p
+            label(for='targetValue') 融资金额：
+            input#targetValue(name='targetValue',value='#{project.targetValue}')
+        p
+            label(for='minTarget') 最小额度：
+            input#minTarget(name='minTarget',value='#{project.minTarget}')
+        p
+            label(for='openDate') 开始时间：
+            input#openDate(name='openDate',value='#{project.openDate}')
+        p
+            label(for='closeDate') 结束时间：
+            input#closeDate(name='closeDate',value='#{project.closeDate}')
+        p
+            资源需求：
+            each skill, key in skills
+                input(
+                    id='skill#{key}'
+                    name='skills'
+                    type='checkbox'
+                    value='#{key}'
+                    checked=project.skills.indexOf(key) !== -1 && 'checked'
+                )
+                label(for='skill#{key}')= skill
+        p
+            label(for='content') 项目介绍：
+        p
+            textarea#content(name='content',cols=50,rows=10)= project.content
+        p
+            input(type='submit',value='SUBMIT')
+            a(href='/project') CANCEL
