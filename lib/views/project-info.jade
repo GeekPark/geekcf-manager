@@ -1,6 +1,11 @@
 extends _layout
 
 block content
+    script(src='/module.min.js')
+    script(src='/hotkeys.min.js')
+    script(src='/simditor.min.js')
+    link(rel='stylesheet',href='/simditor.css')
+
     h2
         | 修改项目
     p
@@ -58,3 +63,8 @@ block content
         p
             input(type='submit',value='SUBMIT')
             a(href='/project') CANCEL
+
+    script.
+        var editor = new Simditor({
+            textarea: $('#content')
+        });

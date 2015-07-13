@@ -5,7 +5,8 @@ block content
         | 项目
     p
         a(href='/project/new') 添加新项目
-        ul
+        ol
             each project, index in projects.length ? projects : ['nothing...']
-                li= index + 1 + ' : ' + (project.title || project)
+                li
                     a(href='/project/#{project._id}/info') EDIT
+                    strong= project.title || project
