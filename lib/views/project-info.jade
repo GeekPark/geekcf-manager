@@ -28,23 +28,23 @@ block content
                     option(value=index,selected=index == project.turn && "selected")= value + ' 轮'
         p
             label(for='totalValue') 估值：
-            input#totalValue(name='totalValue',value='#{project.totalValue}')
+            input#totalValue(type='number',name='totalValue',value='#{project.totalValue}')
         p
             label(for='percent') 出让比例：
-            input#percent(name='percent',value='#{project.percent}')
+            input#percent(type='number',name='percent',value='#{project.percent}')
             span.cover %
         p
             label(for='targetValue') 融资金额：
-            input#targetValue(name='targetValue',value='#{project.targetValue}')
+            input#targetValue(type='number',name='targetValue',value='#{project.targetValue}')
         p
             label(for='minTarget') 最小额度：
-            input#minTarget(name='minTarget',value='#{project.minTarget}')
+            input#minTarget(type='number',name='minTarget',value='#{project.minTarget}')
         p
             label(for='openDate') 开始时间：
-            input#openDate(name='openDate',value='#{project.openDate}')
+            input#openDate(type='date',name='openDate',value='#{format(project.openDate, "YYYY-MM-DD")}')
         p
             label(for='closeDate') 结束时间：
-            input#closeDate(name='closeDate',value='#{project.closeDate}')
+            input#closeDate(type='date',name='closeDate',value='#{format(project.closeDate, "YYYY-MM-DD")}')
         p
             资源需求：
             each skill, key in skills
