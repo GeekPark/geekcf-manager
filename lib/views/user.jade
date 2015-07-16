@@ -1,0 +1,21 @@
+extends _layout
+
+block content
+    h2 用户
+    p
+        table(width='100%')
+            tr
+                th No.
+                th ID
+                th Username
+                th Email
+                th Realname
+            each user, index in users.length ? users : ['nothing...']
+                tr
+                    td.num= index + 1
+                    td
+                        strong= user._id || user
+                    td= user.username
+                    td= user.email
+                    td= user.realname
+

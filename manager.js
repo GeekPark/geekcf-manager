@@ -59,6 +59,7 @@ function start() {
     });
 
     app.use('/project', require('./lib/routers/project'));
+    app.use('/user', require('./lib/routers/user'));
     app.use('/tool', require('./lib/routers/tool'));
     app.use('/*', require('./lib/routers/home'));
 

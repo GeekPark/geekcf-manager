@@ -7,8 +7,7 @@ block content
     script(src='/simditor.min.js')
     link(rel='stylesheet',href='/simditor.css')
 
-    h2
-        | 修改项目
+    h2 修改项目
     p
         a(href='info') 基础信息
         a(href='team') 团队信息
@@ -18,7 +17,7 @@ block content
             input#title(name='title',value='#{project.title}')
         p
             label(for='cover') 封面图片：
-            input#cover(name='cover',value='#{project.cover}')
+            input#cover(name='cover',size=50,value='#{project.cover}')
         p
             label(for='area') 地区：
             input#area(name='area',value='#{project.area}')
@@ -46,8 +45,7 @@ block content
         p
             label(for='closeDate') 结束时间：
             input#closeDate(type='date',name='closeDate',value='#{format(project.closeDate, "YYYY-MM-DD")}')
-        p
-            | 资源需求：
+        p 资源需求：
             each skill, key in skills
                 input(
                     id='skill#{key}'
@@ -57,6 +55,9 @@ block content
                     checked=project.skills.indexOf(key) !== -1 && 'checked'
                 )
                 label(for='skill#{key}')= skill
+        p
+            label(for='owner') 项目所属：
+            input#owner(name='owner',size=30,value='#{project.owner}')
         p
             label(for='content') 项目介绍：
         p
