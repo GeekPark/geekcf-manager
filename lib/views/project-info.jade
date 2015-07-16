@@ -45,7 +45,8 @@ block content
         p
             label(for='closeDate') 结束时间：
             input#closeDate(type='date',name='closeDate',value='#{format(project.closeDate, "YYYY-MM-DD")}')
-        p 资源需求：
+        p
+            label 资源需求：
             each skill, key in skills
                 input(
                     id='skill#{key}'
@@ -56,7 +57,7 @@ block content
                 )
                 label(for='skill#{key}')= skill
         p
-            label(for='owner') 项目所属：
+            label(for='owner') 项目所属人：
             input#owner(name='owner',size=30,value='#{project.owner}')
         p
             label(for='content') 项目介绍：

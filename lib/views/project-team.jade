@@ -8,16 +8,16 @@ block content
     each person, index in project.team
         form(id='p_#{person._id}')
             p
-                label(for='name_#{person._id}') 姓名
+                label(for='name_#{person._id}') 姓名：
                 input(id='name+#{person._id}',name='name')
             p
-                label(for='photo_#{person._id}') 照片
+                label(for='photo_#{person._id}') 照片：
                 input(id='photo_name#{person._id}',name='photo')
             p
-                label(for='position_#{person._id}') 职位
+                label(for='position_#{person._id}') 职位：
                 input(id='position_+#{person._id}',name='position')
             p
-                label(for='remark_#{person._id}') 介绍
+                label(for='remark_#{person._id}') 介绍：
                 input(id='remark_+#{person._id}',name='remark')
             p
                 input(type='submit',value='SUBMIT')

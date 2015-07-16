@@ -7,7 +7,7 @@ pre {
     line-height: 10px;
 }
 label {
-    min-width: 80px;
+    min-width: 90px;
     display: inline-block;
 }
 input, textarea, select {
@@ -65,10 +65,6 @@ input[type="submit"]:active, input[type="button"]:active {
     display: inline-block;
     font-weight: bold;
     padding: 2px 5px;
-}
-#main {
-    width: 1400px;
-    margin: 0 auto;
 }
 #menu, #menu li {
     margin: 0;
