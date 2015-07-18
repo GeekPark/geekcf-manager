@@ -82,5 +82,17 @@ block content
             upload: {
                 url: '#{uploadAPI}',
                 fileKey: 'uploadFile'
+            },
+            allowedTags: [
+                'br', 'a', 'img', 'b', 'strong', 'i', 'u', 'font', 'hr', 'embed', 'iframe',
+                'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'hr'
+            ],
+            allowedAttributes: {
+                img: ['src', 'alt', 'width', 'height', 'data-non-image'],
+                a: ['href', 'target'],
+                font: ['color'],
+                code: ['class'],
+                embed: ['src', 'quality','width', 'height', 'align', 'allowScriptAccess', 'allowFullScreen', 'mode', 'type'],
+                iframe: ['width', 'height', 'src', 'frameborder', 'allowfullscreen']
             }
         });
