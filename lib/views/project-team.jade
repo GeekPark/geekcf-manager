@@ -1,24 +1,40 @@
 extends _layout
 
 block content
-    h2 修改项目
+    h2 修改项目团队信息
     p
         a(href='info') 基础信息
         a(href='team') 团队信息
     each person, index in project.team
-        form(id='p_#{person._id}')
+        form(id='p_#{person._id}',action='/project/#{project._id}/team/#{person._id}',method='POST')
             p
                 label(for='name_#{person._id}') 姓名：
-                input(id='name+#{person._id}',name='name')
+                input(id='name_#{person._id}',name='name',value='#{person.name}')
+                label(for='position_#{person._id}') 职位：
+                input(id='position_#{person._id}',name='position',value='#{person.position}')
             p
                 label(for='photo_#{person._id}') 照片：
-                input(id='photo_name#{person._id}',name='photo')
-            p
-                label(for='position_#{person._id}') 职位：
-                input(id='position_+#{person._id}',name='position')
+                input(id='photo_#{person._id}',size=50,name='photo',value='#{person.photo}')
             p
                 label(for='remark_#{person._id}') 介绍：
-                input(id='remark_+#{person._id}',name='remark')
+                textarea(id='remark_#{person._id}',cols=50,rows=5,name='remark')
+                    | #{person.remark}
             p
-                input(type='submit',value='SUBMIT')
-                a(href='/project') CANCEL
+                input(type='hidden',value='#{person._id}')
+                input(type='submit',value='SAVE')
+                a(href='/project/#{project._id}/team/#{person._id}/delete') DELETE
+            hr
+    form(id='p_new',action='/project/#{project._id}/team',method='POST')
+        p
+            label(for='name_new') 姓名：
+            input(id='name_new',name='name')
+            label(for='position_new') 职位：
+            input(id='position_new',name='position')
+        p
+            label(for='photo_new') 照片：
+            input(id='photo_new',size=50,name='photo')
+        p
+            label(for='remark_new') 介绍：
+            textarea(id='remark_new',cols=50,rows=5,name='remark')
+        p
+            input(type='submit',value='ADD NEW')

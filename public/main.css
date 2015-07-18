@@ -8,6 +8,7 @@ pre {
 }
 label {
     min-width: 90px;
+    padding: 3px 5px;
     display: inline-block;
 }
 input, textarea, select {
