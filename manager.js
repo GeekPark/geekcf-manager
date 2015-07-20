@@ -4,6 +4,7 @@ var jade         = require('jade'),
     compression  = require('compression'),
     bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
+    config       = require('./lib/config'),
     util         = require('./lib/utils'),
     base         = require('./lib/base'),
     app          = express();
@@ -39,8 +40,8 @@ function start() {
 
     // checkin
     app.use(function(req, res, next) {
-        var ckuid    = req.signedCookies.uid,
-            admin    = JSON.parse(base.file.read(base.config.confPath + 'admin.json') || '[]');
+        var ckuid = req.signedCookies.uid,
+            admin = JSON.parse(base.file.read(base.config.confPath + 'admin.json') || '[]');
 
         app.locals = {
             domain: req.headers.host.replace('manager.', ''),
@@ -67,5 +68,7 @@ function start() {
     util.error('|-.-|  ~ GEEK CF Manager Service ~  |-.-|');
     util.error('=========================================');
 
-    app.listen(11090);
+    for(var i=0, l=config.ports.length; i<l; i++) {
+        app.listen(config.ports[i]);
+    }
 }
