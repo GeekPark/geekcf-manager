@@ -61,7 +61,7 @@ block content
                 label(for='skill#{key}')= skill
         p
             label(for='owner') 项目所属人：
-            input#owner(name='owner',size=30,value='#{project.owner}')
+            input#owner(name='owner',size=30,value='#{project.owner || ""}')
         p
             label(for='content') 项目介绍：
         p
