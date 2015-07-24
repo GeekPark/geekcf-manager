@@ -14,10 +14,14 @@ block content
     p
         a(href='info') 基础信息
         a(href='team') 团队信息
+        a(href='activity') 活动信息
     form(method='POST')
         p
             label(for='title') 项目标题：
             input#title(name='title',value='#{project.title}')
+        p
+            label(for='icon') 项目图标：
+            input#icon(name='icon',value='#{project.icon}')
         p
             label(for='cover') 封面图片：
             input#cover(name='cover',size=50,value='#{project.cover}')

@@ -1,0 +1,46 @@
+extends _layout
+
+block content
+    h2 修改项目活动信息
+    p
+        a(href='info') 基础信息
+        a(href='team') 团队信息
+        a(href='activity') 活动信息
+    each activity, index in activities
+        form(id='a_#{activity.project}',action='/project/#{projectId}/activity/#{activity._id}',method='POST')
+            p
+                label(for='name=_#{activity._id}') 标题：
+                input(id='name=_#{activity._id}',size=50,name='title',value='#{activity.title}')
+            p
+                label(for='address_#{activity._id}') 地址：
+                input(id='address_#{activity._id}',size=50,name='address',value='#{activity.address}')
+            p
+                label(for='maxNums_#{activity._id}') 人数：
+                input(id='maxNums_#{activity._id}',size=5,type='number',name='maxNums',value='#{activity.photo}')
+            p
+                label(for='content_#{activity._id}') 介绍：
+                textarea(id='content_#{activity._id}',cols=50,rows=5,name='content')
+                    | #{activity.content}
+            p
+                input(type='hidden',name='state',value='1')
+                input(type='hidden',name='project',value='#{projectId}')
+                input(type='submit',value='SAVE')
+                a(href='/project/#{projectId}/activity/#{activity._id}/delete') DELETE
+            hr
+    form(id='p_new',action='/project/#{projectId}/activity',method='POST')
+        p
+            label(for='name=_new') 标题：
+            input(id='name=_new',size=50,title='title')
+        p
+            label(for='address_new') 地址：
+            input(id='address_new',size=50,name='address')
+        p
+            label(for='maxNums_new') 人数：
+            input(id='maxNums_new',size=5,type='number',name='maxNums')
+        p
+            label(for='content_new') 介绍：
+            textarea(id='content_new',cols=50,rows=5,name='content')
+        p
+            input(type='hidden',name='state',value='1')
+            input(type='hidden',name='project',value='#{projectId}')
+            input(type='submit',value='ADD NEW')
