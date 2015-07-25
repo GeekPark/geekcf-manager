@@ -16,7 +16,7 @@ block content
                 input(id='address_#{activity._id}',size=50,name='address',value='#{activity.address}')
             p
                 label(for='maxNums_#{activity._id}') 人数：
-                input(id='maxNums_#{activity._id}',size=5,type='number',name='maxNums',value='#{activity.photo}')
+                input(id='maxNums_#{activity._id}',size=5,type='number',name='maxNums',value='#{activity.maxNums}')
             p
                 label(for='content_#{activity._id}') 介绍：
                 textarea(id='content_#{activity._id}',cols=50,rows=5,name='content')
@@ -30,7 +30,7 @@ block content
     form(id='p_new',action='/project/#{projectId}/activity',method='POST')
         p
             label(for='name=_new') 标题：
-            input(id='name=_new',size=50,title='title')
+            input(id='name=_new',size=50,name='title')
         p
             label(for='address_new') 地址：
             input(id='address_new',size=50,name='address')
