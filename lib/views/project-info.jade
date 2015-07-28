@@ -21,7 +21,7 @@ block content
             input#title(name='title',value='#{project.title}')
         p
             label(for='icon') 项目图标：
-            input#icon(name='icon',value='#{project.icon}')
+            input#icon(name='icon',size=50,value='#{project.icon}')
         p
             label(for='cover') 封面图片：
             input#cover(name='cover',size=50,value='#{project.cover}')
@@ -49,6 +49,9 @@ block content
         p
             label(for='minTarget') 最小额度：
             input#minTarget(type='number',name='minTarget',value='#{project.minTarget}')
+        p
+            label(for='maxTarget') 最大额度：
+            input#maxTarget(type='number',name='maxTarget',value='#{project.maxTarget}')
         p
             label(for='openDate') 开始时间：
             input#openDate(type='date',name='openDate',value='#{format(project.openDate, "YYYY-MM-DD")}')

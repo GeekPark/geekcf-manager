@@ -1,14 +1,26 @@
 extends _layout
 
 block content
+    script(src='/module.min.js')
+    script(src='/uploader.min.js')
+    script(src='/hotkeys.min.js')
+    script(src='/simditor.min.js')
+    script(src='/beautify-html.js')
+    script(src='/simditor-html.js')
+    link(rel='stylesheet',href='/simditor.css')
+    link(rel='stylesheet',href='/simditor-html.css')
+
     h2 添加新项目
     form(method='POST')
         p
             label(for='title') 项目标题：
             input#title(name='title')
         p
+            label(for='icon') 项目图标：
+            input#icon(name='icon', size=50)
+        p
             label(for='cover') 封面图片：
-            input#cover(name='cover')
+            input#cover(name='cover', size=50)
         p
             label(for='area') 地区：
             input#area(name='area')
@@ -32,18 +44,24 @@ block content
             input#targetValue(name='targetValue')
         p
             label(for='minTarget') 最小额度：
-            input#minTarget(name='minTarget')
+            input#minTarget(type='number',name='minTarget')
+        p
+            label(for='maxTarget') 最大额度：
+            input#maxTarget(type='number',name='maxTarget')
         p
             label(for='openDate') 开始时间：
-            input#openDate(name='openDate')
+            input#openDate(name='openDate',type='date')
         p
             label(for='closeDate') 结束时间：
-            input#closeDate(name='closeDate')
+            input#closeDate(name='closeDate',type='date')
         p
-            资源需求：
+            label 资源需求：
             each skill, key in skills
                 input(id='skill#{key}',name='skills',type='checkbox',value='#{key}')
                 label(for='skill#{key}')= skill
+        p
+            label(for='owner') 项目所属人：
+            input#owner(name='owner',size=30)
         p
             label(for='content') 项目介绍：
         p
@@ -51,3 +69,30 @@ block content
         p
         input(type='submit',value='SUBMIT')
         a(href='/project') CANCEL
+
+        script.
+            var editor = new Simditor({
+                textarea: $('#content'),
+                toolbar: [
+                    'title', 'bold', 'italic', 'underline',
+                    'strikethrough', 'color', 'ol', 'ul',
+                    'blockquote', 'code', 'table', 'link',
+                    'image', 'hr', 'indent', 'outdent', 'alignment', 'html'
+                ],
+                upload: {
+                    url: '#{uploadAPI}',
+                    fileKey: 'uploadFile'
+                },
+                allowedTags: [
+                    'br', 'a', 'img', 'b', 'strong', 'i', 'u', 'font', 'hr', 'embed', 'iframe',
+                    'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'hr'
+                ],
+                allowedAttributes: {
+                    img: ['src', 'alt', 'width', 'height', 'data-non-image'],
+                    a: ['href', 'target'],
+                    font: ['color'],
+                    code: ['class'],
+                    embed: ['src', 'quality','width', 'height', 'align', 'allowScriptAccess', 'allowFullScreen', 'mode', 'type'],
+                    iframe: ['width', 'height', 'src', 'frameborder', 'allowfullscreen']
+                }
+            });
