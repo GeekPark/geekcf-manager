@@ -56,7 +56,6 @@ block content
             label(for='closeDate') 结束时间：
             input#closeDate(type='date',name='closeDate',value='#{format(project.closeDate, "YYYY-MM-DD")}')
         p
-            | #{project.skills}
             label 资源需求：
             each skill, key in skills
                 input(
