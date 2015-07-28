@@ -7,9 +7,12 @@ block content
             tr
                 th No.
                 th ID
-                th Username
+                th 用户名
                 th Email
-                th Realname
+                th 真实姓名
+                th 公司
+                th 投资人
+                th 切换身份
             each user, index in users.length ? users : ['nothing...']
                 tr
                     td.num= index + 1
@@ -18,4 +21,7 @@ block content
                     td= user.username
                     td= user.email
                     td= user.realname
-
+                    td= user.company + ' ' + user.position
+                    td= user.isInvestor ? '投资人' : '非投资人'
+                    td
+                        a(href='/user/#{user._id}/#{user.isInvestor ? "no" : "yes"}') 切换
