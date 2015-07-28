@@ -23,6 +23,7 @@ table {
     border-collapse:collapse;
 }
 th {
+    min-width: 50px;
     background-color: #e7e7e7;
 }
 th, td {
