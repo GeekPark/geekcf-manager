@@ -10,18 +10,18 @@ block content
                 th 用户名
                 th Email
                 th 真实姓名
-                th 公司
+                th 手机号
                 th 投资人
                 th 切换
             each user, index in users.length ? users : ['nothing...']
-                tr
+                tr(title='#{user.company} #{user.position}')
                     td.num= index + 1
                     td
                         strong= user._id
                     td= user.username
                     td= user.email
                     td= user.realname
-                    td= user.company + ' ' + user.position
+                    td= user.mobile
                     td
                         if user.isInvestor
                             strong 投
