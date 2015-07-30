@@ -24,10 +24,10 @@ table {
 }
 th {
     min-width: 50px;
-    background-color: #e7e7e7;
+    background-color: #ccc;
 }
 th, td {
-    padding: 2px;
+    padding: 3px;
     border:solid 1px;
 }
 a {
@@ -81,7 +81,7 @@ input[type="submit"]:active, input[type="button"]:active {
 }
 .num {
     text-align: right;
-    background-color: #ccc;
+    background-color: #eee;
 }
 .cloud a {
     display: inline-block;
