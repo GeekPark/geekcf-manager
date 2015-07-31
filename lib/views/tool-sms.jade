@@ -1,0 +1,32 @@
+extends _layout
+
+block content
+    h2 发送短信
+    form(method='POST')
+        p 选择群组：
+            input#investor(name='investor',type='checkbox')
+            label(for='investor') 投资人
+            input#notInvestor(name='notInvestor',type='checkbox')
+            label(for='notInvestor') 非投资人
+        p
+            label(for='testMobile') 测试手机号：
+            input#testMobile(name='testMobile',size=30)
+        p 选择模版：
+        table(width='100%')
+            tr
+                th 选择
+                th 模版ID
+                th 模版内容
+                th 模版状态
+            each tpl in template
+                if tpl.tpl_content.indexOf('#') === -1 && tpl.check_status === 'SUCCESS'
+                    tr
+                        td
+                            input(name='text',value='#{tpl.tpl_content}',type='radio')
+                        td.num= tpl.tpl_id
+                        td= tpl.tpl_content
+                        td= tpl.check_status
+        p
+            input(type='submit',value='SEND')
+            a(href='/tool') CANCEL
+
