@@ -1,6 +1,16 @@
 extends _layout
 
 block content
+    script(src='/module.min.js')
+    script(src='/uploader.min.js')
+    script(src='/hotkeys.min.js')
+    script(src='/simditor.min.js')
+    script(src='/beautify-html.js')
+    script(src='/simditor-html.js')
+    link(rel='stylesheet',href='/simditor.css')
+    link(rel='stylesheet',href='/simditor-html.css')
+
+
     h2 修改项目团队信息
     p
         a(href='info') 基础信息
@@ -25,6 +35,8 @@ block content
                 input(type='submit',value='SAVE')
                 a(href='/project/#{project._id}/team/#{person._id}/delete') DELETE
             hr
+
+
     form(id='p_new',action='/project/#{project._id}/team',method='POST')
         p
             label(for='name_new') 姓名：
@@ -39,3 +51,34 @@ block content
             textarea(id='remark_new',cols=50,rows=5,name='remark')
         p
             input(type='submit',value='ADD NEW')
+
+     script.
+        $("textarea").each(function(){
+            var editor = new Simditor({
+                textarea: $(this),
+                toolbar: [
+                    'title', 'bold', 'italic', 'underline',
+                    'strikethrough', 'color', 'ol', 'ul',
+                    'blockquote', 'code', 'table', 'link',
+                    'image', 'hr', 'indent', 'outdent', 'alignment', 'html'
+                ],
+                upload: {
+                    url: '#{uploadAPI}',
+                    fileKey: 'uploadFile'
+                },
+                allowedTags: [
+                    'br', 'a', 'img', 'b', 'strong', 'i', 'u', 'font', 'hr', 'embed', 'iframe',
+                    'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'hr'
+                ],
+                allowedAttributes: {
+                    img: ['src', 'alt', 'width', 'height', 'data-non-image'],
+                    a: ['href', 'target'],
+                    font: ['color'],
+                    code: ['class'],
+                    embed: ['src', 'quality','width', 'height', 'align', 'allowScriptAccess', 'allowFullScreen', 'mode', 'type'],
+                    iframe: ['width', 'height', 'src', 'frameborder', 'allowfullscreen']
+                }
+            });
+
+        });
+       
