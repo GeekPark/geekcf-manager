@@ -26,6 +26,7 @@ block content
                 input(type='hidden',name='project',value='#{projectId}')
                 input(type='submit',value='SAVE')
                 a(href='/project/#{projectId}/activity/#{activity._id}/delete') DELETE
+                a(href='/project/#{projectId}/activity/#{activity._id}') USERS
             hr
     form(id='p_new',action='/project/#{projectId}/activity',method='POST')
         p

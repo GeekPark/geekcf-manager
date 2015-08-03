@@ -1,0 +1,24 @@
+extends _layout
+
+block content
+    h2 活动关注信息
+    p
+        a(href='/project/#{projectId}/activity') 返回
+    table(width='100%')
+        tr
+            th No.
+            th 用户名
+            th 邮箱
+            th 姓名
+            th 公司
+            th 职位
+            th 时间
+        each user, index in users
+            tr
+                td.num= index + 1
+                td= user.username
+                td= user.email
+                td= user.realname
+                td= user.company
+                td= user.position
+                td= format(user.added)
