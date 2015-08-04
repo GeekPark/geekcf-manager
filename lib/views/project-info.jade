@@ -53,7 +53,10 @@ block content
             label(for='maxTarget') 最大额度：
             input#maxTarget(type='number',name='maxTarget',value='#{project.maxTarget}')
         p
-            label(for='openDate') 开始时间：
+            label(for='readyDate') 预认购时间：
+            input#readyDate(type='date',name='readyDate',value='#{format(project.readyDate, "YYYY-MM-DD")}')
+        p
+            label(for='openDate') 认购时间：
             input#openDate(type='date',name='openDate',value='#{format(project.openDate, "YYYY-MM-DD")}')
         p
             label(for='closeDate') 结束时间：
