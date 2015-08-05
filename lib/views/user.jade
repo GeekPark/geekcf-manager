@@ -22,10 +22,21 @@ block content
                     td= user.email
                     td= user.realname
                     td= user.mobile
-                    td
+                    td(id='state_#{user._id}')
                         if user.isInvestor
                             strong 投
                         else
                             em 非
                     td
-                        a(href='/user/#{user._id}/#{user.isInvestor ? "no" : "yes"}') 切换
+                        a(id='act_#{user._id}',class='actLink',href='/user/#{user._id}/#{user.isInvestor ? "no" : "yes"}') 切换
+    script.
+        $('.actLink')
+            .on('click', function(evt) {
+                evt.preventDefault();
+                $.getJSON(this.href, function(data) {
+                    var id = data._id,
+                        isInvestor = data.isInvestor;
+                    $('#state_' + id).html(isInvestor ? '<strong>投</strong>' : '<em>非</em>');
+                    $('#act_' + id).attr('href', '/user/' + id + '/' + (isInvestor ? 'no' : 'yes'));
+                });
+            });
