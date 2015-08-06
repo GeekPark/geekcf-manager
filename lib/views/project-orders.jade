@@ -10,8 +10,11 @@ block content
         tr
             th No.
             th 订单号
-            th 用户
             th 姓名
+            th 邮箱
+            th 公司
+            th 职位
+            th 电话
             th 认购金额
             th 订单状态
             th 下单时间
@@ -19,8 +22,11 @@ block content
             tr
                 td.num= index + 1
                 td= order._id
-                td= order.user.username
                 td= order.user.realname
+                td= order.user.email
+                td= order.user.company
+                td= order.user.position
+                td= order.user.mobile
                 td.num= order.amount
                 td= order.state
                 td= format(order.added)
