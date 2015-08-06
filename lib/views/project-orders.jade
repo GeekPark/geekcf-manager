@@ -18,6 +18,7 @@ block content
             th 认购金额
             th 订单状态
             th 下单时间
+            th 操作
         each order, index in orders
             tr
                 td.num= index + 1
@@ -30,4 +31,6 @@ block content
                 td.num= order.amount
                 td= order.state
                 td= format(order.added)
+                td
+                    a(href='/order/#{order._id}/delete') 删除
 
