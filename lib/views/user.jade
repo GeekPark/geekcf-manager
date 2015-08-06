@@ -26,7 +26,10 @@ block content
                         if user.isInvestor
                             strong 投
                         else
-                            em 非
+                            if user.applyInvestor
+                                em(style='color:red') 申
+                            else
+                                em 非
                     td
                         a(id='act_#{user._id}',class='actLink',href='/user/#{user._id}/#{user.isInvestor ? "no" : "yes"}') 切换
     script.
