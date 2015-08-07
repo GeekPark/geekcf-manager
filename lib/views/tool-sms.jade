@@ -19,7 +19,7 @@ block content
                 th 模版内容
                 th 模版状态
             each tpl in template
-                if tpl.tpl_content.indexOf('#') === -1 && tpl.check_status === 'SUCCESS'
+                if tpl.tpl_content.indexOf('#') === -1
                     tr
                         td
                             input(name='text',value='#{tpl.tpl_content}',type='radio')
