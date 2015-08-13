@@ -10,10 +10,10 @@ block content
     link(rel='stylesheet',href='/simditor.css')
     link(rel='stylesheet',href='/simditor-html.css')
 
-
     h2 修改项目团队信息
     p
         a(href='info') 基础信息
+        a(href='product') 产品信息
         a(href='team') 团队信息
         a(href='activity') 活动信息
     each person, index in project.team
@@ -36,7 +36,6 @@ block content
                 a(href='/project/#{project._id}/team/#{person._id}/delete') DELETE
             hr
 
-
     form(id='p_new',action='/project/#{project._id}/team',method='POST')
         p
             label(for='name_new') 姓名：
@@ -52,7 +51,7 @@ block content
         p
             input(type='submit',value='ADD NEW')
 
-     script.
+    script.
         $("textarea").each(function(){
             var editor = new Simditor({
                 textarea: $(this),
@@ -79,6 +78,4 @@ block content
                     iframe: ['width', 'height', 'src', 'frameborder', 'allowfullscreen']
                 }
             });
-
         });
-       

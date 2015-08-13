@@ -1,0 +1,53 @@
+extends _layout
+
+block content
+    script(src='/module.min.js')
+    script(src='/uploader.min.js')
+    script(src='/hotkeys.min.js')
+    script(src='/simditor.min.js')
+    script(src='/beautify-html.js')
+    script(src='/simditor-html.js')
+    link(rel='stylesheet',href='/simditor.css')
+    link(rel='stylesheet',href='/simditor-html.css')
+
+    h2 修改项目产品信息
+    p
+        a(href='info') 基础信息
+        a(href='product') 产品信息
+        a(href='team') 团队信息
+        a(href='activity') 活动信息
+    form(method='POST')
+        p
+            label(for='product') 产品介绍：
+        p
+            textarea#product(name='product',cols=50,rows=10)= project.product
+        p
+            input(type='submit',value='SUBMIT')
+            a(href='/project') CANCEL
+
+    script.
+        var editor = new Simditor({
+            textarea: $('#product'),
+            toolbar: [
+                'title', 'bold', 'italic', 'underline',
+                'strikethrough', 'color', 'ol', 'ul',
+                'blockquote', 'code', 'table', 'link',
+                'image', 'hr', 'indent', 'outdent', 'alignment', 'html'
+            ],
+            upload: {
+                url: '#{uploadAPI}',
+                fileKey: 'uploadFile'
+            },
+            allowedTags: [
+                'br', 'a', 'img', 'b', 'strong', 'i', 'u', 'font', 'hr', 'embed', 'iframe',
+                'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'hr'
+            ],
+            allowedAttributes: {
+                img: ['src', 'alt', 'width', 'height', 'data-non-image'],
+                a: ['href', 'target'],
+                font: ['color'],
+                code: ['class'],
+                embed: ['src', 'quality','width', 'height', 'align', 'allowScriptAccess', 'allowFullScreen', 'mode', 'type'],
+                iframe: ['width', 'height', 'src', 'frameborder', 'allowfullscreen']
+            }
+        });

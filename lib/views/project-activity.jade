@@ -1,9 +1,19 @@
 extends _layout
 
 block content
+    script(src='/module.min.js')
+    script(src='/uploader.min.js')
+    script(src='/hotkeys.min.js')
+    script(src='/simditor.min.js')
+    script(src='/beautify-html.js')
+    script(src='/simditor-html.js')
+    link(rel='stylesheet',href='/simditor.css')
+    link(rel='stylesheet',href='/simditor-html.css')
+
     h2 修改项目活动信息
     p
         a(href='info') 基础信息
+        a(href='product') 产品信息
         a(href='team') 团队信息
         a(href='activity') 活动信息
     each activity, index in activities
@@ -18,11 +28,20 @@ block content
                 label(for='maxNums_#{activity._id}') 人数：
                 input(id='maxNums_#{activity._id}',size=5,type='number',name='maxNums',value='#{activity.maxNums}')
             p
+                label(for='state') 活动状态：
+                each value, index in state
+                    input(id='state_#{index}',type='radio',name='state',value=index,checked=index == activity.state && "checked")
+                    label(for='state_#{index}')= value
+            p
                 label(for='content_#{activity._id}') 介绍：
                 textarea(id='content_#{activity._id}',cols=50,rows=5,name='content')
                     | #{activity.content}
             p
-                input(type='hidden',name='state',value='1')
+                label(for='review_#{activity._id}') 回顾：
+            p
+                textarea(id='review_#{activity._id}',cols=50,rows=5,name='review')
+                    | #{activity.review}
+            p
                 input(type='hidden',name='project',value='#{projectId}')
                 input(type='submit',value='SAVE')
                 a(href='/project/#{projectId}/activity/#{activity._id}/delete',onclick='return confirm("确定要删除活动吗?")') DELETE
@@ -39,9 +58,46 @@ block content
             label(for='maxNums_new') 人数：
             input(id='maxNums_new',size=5,type='number',name='maxNums')
         p
+            label(for='state') 活动状态：
+            each value, index in state
+                input(id='state_#{index}',type='radio',name='state',value=index,checked=index == 1 && "checked")
+                label(for='state_#{index}')= value
+        p
             label(for='content_new') 介绍：
             textarea(id='content_new',cols=50,rows=5,name='content')
         p
-            input(type='hidden',name='state',value='1')
+            label(for='review_new') 回顾：
+        p
+            textarea(id='review_new',cols=50,rows=5,name='review')
+        p
             input(type='hidden',name='project',value='#{projectId}')
             input(type='submit',value='ADD NEW')
+
+        script.
+            $("[name^=review]").each(function(){
+                var editor = new Simditor({
+                    textarea: $(this),
+                        toolbar: [
+                            'title', 'bold', 'italic', 'underline',
+                           'strikethrough', 'color', 'ol', 'ul',
+                           'blockquote', 'code', 'table', 'link',
+                           'image', 'hr', 'indent', 'outdent', 'alignment', 'html'
+                       ],
+                       upload: {
+                           url: '#{uploadAPI}',
+                           fileKey: 'uploadFile'
+                       },
+                       allowedTags: [
+                           'br', 'a', 'img', 'b', 'strong', 'i', 'u', 'font', 'hr', 'embed', 'iframe',
+                           'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'hr'
+                       ],
+                       allowedAttributes: {
+                           img: ['src', 'alt', 'width', 'height', 'data-non-image'],
+                           a: ['href', 'target'],
+                           font: ['color'],
+                           code: ['class'],
+                           embed: ['src', 'quality','width', 'height', 'align', 'allowScriptAccess', 'allowFullScreen', 'mode', 'type'],
+                           iframe: ['width', 'height', 'src', 'frameborder', 'allowfullscreen']
+                               }
+                   });
+               });
