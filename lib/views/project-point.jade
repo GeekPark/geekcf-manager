@@ -10,7 +10,7 @@ block content
     link(rel='stylesheet',href='/simditor.css')
     link(rel='stylesheet',href='/simditor-html.css')
 
-    h2 修改项目产品信息
+    h2 修改项目投资亮点
     p
         a(href='info') 基础信息
         a(href='product') 产品信息
@@ -19,16 +19,16 @@ block content
         a(href='activity') 活动信息
     form(method='POST')
         p
-            label(for='product') 产品介绍：
+            label(for='point') 投资亮点：
         p
-            textarea#product(name='product',cols=50,rows=10)= project.product
+            textarea#point(name='point',cols=50,rows=10)= project.point
         p
             input(type='submit',value='SUBMIT')
             a(href='/project') CANCEL
 
     script.
         var editor = new Simditor({
-            textarea: $('#product'),
+            textarea: $('#point'),
             toolbar: [
                 'title', 'bold', 'italic', 'underline',
                 'strikethrough', 'color', 'ol', 'ul',
