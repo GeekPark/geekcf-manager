@@ -1,0 +1,29 @@
+extends _layout
+
+block content
+    h2 邀请码
+    form(action='invite/create',method='POST')
+        label(for='nums') 允许人数：
+        input#nums(name='nums',size='10')
+        input(type='submit',value='CREATE')
+    p
+        table(width='100%')
+            tr
+                th No.
+                th 邀请码
+                th 允许人数
+                th 已使用数量
+                th 创建日期
+                th 地址
+                th 查看
+            each invite, index in invites
+                tr
+                    td.num= index + 1
+                    td= invite.code
+                    td= invite.nums
+                    td= invite.users.length
+                    td= format(invite.added)
+                    td
+                        a(href='#{webURL + invite.code}',target='_blank') 访问
+                    td
+                        a(href='#{qrapi}' + encodeURIComponent(webURL + invite.code),target='_blank') 查看二维码
