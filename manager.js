@@ -48,6 +48,7 @@ function start() {
                 domain: req.headers.host.replace('manager.', ''),
                 isopen: base.isTrue(req.cookies['open']),
                 format: util.dateformat,
+                token: token,
                 ckuid: ckuid
             };
 
