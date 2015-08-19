@@ -24,6 +24,6 @@ block content
                     td= invite.users.length
                     td= format(invite.added)
                     td
-                        a(href='#{webURL + invite.code}',target='_blank') 访问
+                        a(href='http://#{domain}/register?code=#{invite.code}',target='_blank') 访问
                     td
-                        a(href='#{qrapi}' + encodeURIComponent(webURL + invite.code),target='_blank') 查看二维码
+                        a(href='#{qrapi}' + encodeURIComponent('http://#{domain}/register?code=#{invite.code}'),target='_blank') 查看二维码

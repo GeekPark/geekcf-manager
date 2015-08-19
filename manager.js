@@ -40,23 +40,25 @@ function start() {
 
     // checkin
     app.use(function(req, res, next) {
-        var ckuid = req.signedCookies.uid,
+        var token = req.signedCookies.t,
             admin = JSON.parse(base.file.read(base.config.confPath + 'admin.json') || '[]');
 
-        app.locals = {
-            domain: req.headers.host.replace('manager.', ''),
-            isopen: base.isTrue(req.cookies['open']),
-            format: util.dateformat,
-            ckuid: ckuid
-        };
+        base.token.decoded(token, function(err, ckuid) {
+            app.locals = {
+                domain: req.headers.host.replace('manager.', ''),
+                isopen: base.isTrue(req.cookies['open']),
+                format: util.dateformat,
+                ckuid: ckuid
+            };
 
-        global.uid = ckuid;
+            global.uid = ckuid;
 
-        if(ckuid && (admin.length === 0 || admin.indexOf(ckuid) !== -1)) {
-            next();
-        } else {
-            res.redirect('http://' + app.locals.domain);
-        }
+            if(ckuid && (admin.length === 0 || admin.indexOf(ckuid) !== -1)) {
+                next();
+            } else {
+                res.redirect('http://' + app.locals.domain);
+            }
+        })
     });
 
     app.use('/project', require('./lib/routers/project'));
