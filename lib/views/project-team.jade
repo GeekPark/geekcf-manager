@@ -63,7 +63,7 @@ block content
                     'image', 'hr', 'indent', 'outdent', 'alignment', 'html'
                 ],
                 upload: {
-                    url: '#{uploadAPI}',
+                    url: '#{uploadAPI}?token=#{token}',
                     fileKey: 'uploadFile'
                 },
                 allowedTags: [
