@@ -12,7 +12,6 @@ block content
             th 姓名
             th 公司
             th 职位
-            th 时间
         each user, index in users
             tr
                 td.num= index + 1
@@ -21,4 +20,3 @@ block content
                 td= user.realname
                 td= user.company
                 td= user.position
-                td= format(user.added)
