@@ -3,6 +3,14 @@ extends _layout
 block content
     h2 用户
     a(href='/user/export',target='_blank') 导出投资人
+    form
+        | 过滤：
+        a(href='?') 全部
+        a(href='?t=i') 投资人
+        a(href='?t=n') 非投资人
+        a(href='?t=a') 申请
+        input#q(name='q',size=10,value='#{q || ""}',placeholder='关键字')
+        input(type='submit',value='Search')
     p
         table(width='100%')
             tr
@@ -16,7 +24,7 @@ block content
                 th 职位
                 th 投资人
                 th 切换
-            each user, index in users.length ? users : ['nothing...']
+            each user, index in users
                 tr
                     td.num= index + 1
                     td
@@ -37,6 +45,8 @@ block content
                                 em 非
                     td
                         a(id='act_#{user._id}',class='actLink',href='/user/#{user._id}/#{user.isInvestor ? "no" : "yes"}') 切换
+        a(href='?p=#{parseInt(p) - 1}' + (q ? '&q=#{q}' : '') + (t ? '&t=#{t}' : '')) PREV
+        a(href='?p=#{parseInt(p) + 1}' + (q ? '&q=#{q}' : '') + (t ? '&t=#{t}' : '')) NEXT
     script.
         $('.actLink')
             .on('click', function(evt) {
