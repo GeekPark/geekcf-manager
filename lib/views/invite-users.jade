@@ -1,0 +1,26 @@
+extends _layout
+
+block content
+    h2 邀请码用户信息
+    p
+        a(href='/invite') 返回
+    table(width='100%')
+        tr
+            th No.
+            th 用户名
+            th 邮箱
+            th 电话
+            th 姓名
+            th 公司
+            th 职位
+            th 加入时间
+        each user, index in users
+            tr
+                td.num= index + 1
+                td= user.username
+                td= user.email
+                td= user.mobile
+                td= user.realname
+                td= user.company
+                td= user.position
+                td= format(user.added)

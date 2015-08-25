@@ -16,6 +16,7 @@ block content
                 th 创建日期
                 th 地址
                 th 查看
+                th 用户
             each invite, index in invites
                 tr
                     td.num= index + 1
@@ -27,3 +28,5 @@ block content
                         a(href='http://#{domain}/register?code=#{invite.code}',target='_blank') 访问
                     td
                         a(href='#{qrapi}' + encodeURIComponent('http://#{domain}/register?code=#{invite.code}'),target='_blank') 查看二维码
+                    td
+                        a(href='invite/#{invite._id}') 用户
