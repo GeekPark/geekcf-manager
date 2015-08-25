@@ -26,7 +26,7 @@ block content
                 th 切换
             each user, index in users
                 tr
-                    td.num= index + 1
+                    td.num= index + 1 + (p - 1) * c
                     td
                         strong= user._id
                     td= user.username
