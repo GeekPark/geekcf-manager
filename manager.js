@@ -44,7 +44,7 @@ function start() {
             admin = JSON.parse(base.file.read(base.config.confPath + 'admin.json') || '[]');
 
         base.token.decoded(token, function(err, user) {
-            var ckuid = user.hasOwnProperty('_id') ? user._id : user;
+            var ckuid = user && user.hasOwnProperty('_id') ? user._id : user;
             app.locals = {
                 domain: req.headers.host.replace('manager.', ''),
                 isopen: base.isTrue(req.cookies['open']),

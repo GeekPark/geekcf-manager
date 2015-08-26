@@ -47,6 +47,7 @@ block content
                         a(id='act_#{user._id}',class='actLink',href='/user/#{user._id}/#{user.isInvestor ? "no" : "yes"}') 切换
         a(href='?p=#{parseInt(p) - 1}' + (q ? '&q=#{q}' : '') + (t ? '&t=#{t}' : '')) PREV
         a(href='?p=#{parseInt(p) + 1}' + (q ? '&q=#{q}' : '') + (t ? '&t=#{t}' : '')) NEXT
+        label COUNT: #{count}
     script.
         $('.actLink')
             .on('click', function(evt) {
