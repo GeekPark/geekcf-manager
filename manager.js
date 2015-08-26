@@ -50,7 +50,7 @@ function start() {
                 isopen: base.isTrue(req.cookies['open']),
                 format: util.dateformat,
                 token: token,
-                ckuid: ckuid;
+                ckuid: ckuid
             };
 
             global.uid = ckuid;
