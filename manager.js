@@ -43,13 +43,13 @@ function start() {
         var token = req.signedCookies.t,
             admin = JSON.parse(base.file.read(base.config.confPath + 'admin.json') || '[]');
 
-        base.token.decoded(token, function(err, ckuid) {
+        base.token.decoded(token, function(err, user) {
             app.locals = {
                 domain: req.headers.host.replace('manager.', ''),
                 isopen: base.isTrue(req.cookies['open']),
                 format: util.dateformat,
                 token: token,
-                ckuid: ckuid
+                ckuid: user.hasOwnProperty('_id') ? user._id : user;
             };
 
             global.uid = ckuid;
