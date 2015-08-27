@@ -1,0 +1,36 @@
+extends _layout
+
+block content
+    h2 发送邮件
+    form(method='POST')
+        p 选择群组：
+            input#investor(name='group',type='radio',value='i')
+            label(for='investor') 投资人
+            input#notInvestor(name='group',type='radio',value='n')
+            label(for='notInvestor') 非投资人
+            input#notComplete(name='group',type='radio',value='e')
+            label(for='notComplete') 信息不全
+            input#notPerson(name='group',type='radio',value='',checked='checked')
+            label(for='notPerson') 全不选
+        p
+            label(for='testMail') 测试邮箱：
+            input#testMail(name='testMail',size=30)
+        p
+            label(for='subject') 邮件标题：
+            input#subject(name='subject',size=50)
+        p
+            邮件内容：
+            span#output Result Info...
+        p
+            textarea(name='text',cols=70,rows=10)
+        p
+            input(type='submit',value='SEND')
+            a(href='/tool') CANCEL
+    script.
+        $('form').on('submit', function(evt) {
+            evt.preventDefault();
+            $('#output').text('Sending...');
+            $.post('?', $(this).serialize(), function(data, status) {
+                $('#output').text(data.msg);
+            });
+        });
