@@ -55,6 +55,10 @@ block content
             label(for='maxTarget') 最大额度：
             input#maxTarget(type='number',name='maxTarget',value='#{project.maxTarget}')
         p
+            label(for='carry') Carry：
+            input#carry(type='number',name='carry',value='#{project.carry}')
+            span.cover %
+        p
             label(for='readyDate') 预认购时间：
             input#readyDate(type='date',name='readyDate',value='#{format(project.readyDate, "YYYY-MM-DD")}')
         p
