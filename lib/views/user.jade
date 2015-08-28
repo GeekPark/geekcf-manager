@@ -29,7 +29,7 @@ block content
                     td.num= index + 1 + (p - 1) * c
                     td
                         strong= user._id
-                    td= user.username
+                    td= user.username + (user.isVIP ? '*' : '')
                     td= user.email
                     td= user.realname
                     td= user.mobile
