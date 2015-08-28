@@ -1,6 +1,9 @@
 extends _layout
 
 block content
+    script(src='/bootstrap.min.js')
+    link(rel='stylesheet',href='/bootstrap.min.css')
+
     h2 用户
     a(href='/user/export',target='_blank') 导出投资人
     form
@@ -23,7 +26,8 @@ block content
                 th 公司
                 th 职位
                 th 投资人
-                th 切换
+                th 切换投资人
+                th 实名认证状态
             each user, index in users
                 tr
                     td.num= index + 1 + (p - 1) * c
@@ -45,9 +49,48 @@ block content
                                 em 非
                     td
                         a(id='act_#{user._id}',class='actLink',href='/user/#{user._id}/#{user.isInvestor ? "no" : "yes"}') 切换
+                    td
+                        if user.certified === 0
+                            span 未申请
+                        else if user.certified === 1
+                            em(style='color:red') 申请 
+                            a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=user) 查看和修改
+                        else if user.certified === 2
+                            em(style='color:red') 审核通过
+                            a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=user) 查看和修改
+                        else if user.certified === 3
+                            em(style='color:red') 审核未通过
+                            a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=user) 查看和修改
+                        
         a(href='?p=#{parseInt(p) - 1}' + (q ? '&q=#{q}' : '') + (t ? '&t=#{t}' : '')) PREV
         a(href='?p=#{parseInt(p) + 1}' + (q ? '&q=#{q}' : '') + (t ? '&t=#{t}' : '')) NEXT
         label COUNT: #{count}
+    div(class="modal fade " id="dialogModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true")&times;
+                    h4(class="modal-title") 身份验证信息
+                    .modal-body
+                        form
+                            input(type="hidden" id="userId")
+                            h3 身份证号
+                            h4(id="certNo")
+                            h3 真实姓名
+                            h4(id="realname")
+                            h3 身份证照片
+                            img(id="image1" src="" width="100%",heigth="100%")
+                            img(id="image2" src="" width="100%",heigth="100%")
+                            h3 状态
+                            select(id="certified")
+                                option(value="1")正在审核
+                                option(value="2")通过审核
+                                option(value="3")不通过审核
+                .modal-footer
+                    button(type="button" class="btn btn-default" data-dismiss="modal") close
+                    button(type="button" id="certSubmit" class="btn btn-primary") submit
+
     script.
         $('.actLink')
             .on('click', function(evt) {
@@ -59,3 +102,25 @@ block content
                     $('#act_' + id).attr('href', '/user/' + id + '/' + (isInvestor ? 'no' : 'yes'));
                 });
             });
+        $('#dialogModel').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var user = button.data('whatever') 
+            console.log(user);
+            //不写ajax了
+            var modal = $(this)
+            modal.find('#realname').text(user.realname);
+            modal.find('#certNo').text(user.certNo);
+            modal.find('#image1').attr("src",user.certImages[0]);
+            modal.find('#image2').attr("src",user.certImages[1]);
+            modal.find('#userId').val(user._id);
+            $("#certified").val(user.certified);
+        });
+
+        $('#certSubmit').on('click',function(evt){
+            var body = {};
+            body.certified = $('#certified').val();
+            body._id = $('#userId').val();
+            $.post("/user/certified",body,function(data){
+                location=location;
+            });
+        });
