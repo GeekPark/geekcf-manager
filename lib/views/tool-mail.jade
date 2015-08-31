@@ -29,8 +29,10 @@ block content
     script.
         $('form').on('submit', function(evt) {
             evt.preventDefault();
-            $('#output').text('Sending...');
-            $.post('?', $(this).serialize(), function(data, status) {
-                $('#output').text(data.msg);
-            });
+            if(confirm('确定要发送邮件吗？')) {
+                $('#output').text('Sending...');
+                $.post('?', $(this).serialize(), function(data, status) {
+                    $('#output').text(data.msg);
+                });
+            }
         });
