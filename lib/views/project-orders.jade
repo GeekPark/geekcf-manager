@@ -29,8 +29,46 @@ block content
                 td= order.user.position
                 td= order.user.mobile
                 td.num= order.amount
-                td= order.state
+                td 
+                    if order.state === 0
+                        span 意向
+                    else if order.state === 1
+                        span 已付款
+                    else if order.state === 2
+                        span 被选中
+                    else if order.state === 3
+                        span 被拒绝
+                    else if order.state === 4
+                        span 退款
                 td= format(order.added)
                 td
+                    if order.state === 0
+                        a(href='#' onclick="changeState('#{order._id}',2)") 通过
+                        a(href='#' onclick="changeState('#{order._id}',3)") 拒绝
                     a(href='/order/#{order._id}/delete') 删除
+
+
+    script.
+        function changeState(id,state){
+            if(state === 2){
+                message = '确认通过审核订单号:'+id+'通过后不能撤销';
+            } else if(state === 3){
+                message = '确认拒绝订单号: '+id+' 拒绝后不能撤销';
+            }else{
+                return;
+            }
+            if(confirm(message)){
+                var body = {};
+                body.state = state;
+                $.ajax({
+                    url: "/order/"+id+"/state",
+                    data: body,
+                    type: 'PUT',
+                    success: function(result) {
+                        location=location;
+                    }
+                });
+            }
+           
+        }
 
