@@ -11,7 +11,12 @@ block content
         a(href='?') 全部
         a(href='?t=i') 投资人
         a(href='?t=n') 非投资人
-        a(href='?t=a') 申请
+        a(href='?t=a') 申请投资人
+        | | 实名
+        a(href='?t=r0') 未申请
+        a(href='?t=r1') 申请
+        a(href='?t=r2') 通过
+        a(href='?t=r3') 未通过
         input#q(name='q',size=10,value='#{q || ""}',placeholder='关键字')
         input(type='submit',value='Search')
     p
@@ -61,7 +66,6 @@ block content
                         else if user.certified === 3
                             em(style='color:red') 审核未通过
                             a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=user) 查看和修改
-                        
         a(href='?p=#{parseInt(p) - 1}' + (q ? '&q=#{q}' : '') + (t ? '&t=#{t}' : '')) PREV
         a(href='?p=#{parseInt(p) + 1}' + (q ? '&q=#{q}' : '') + (t ? '&t=#{t}' : '')) NEXT
         label COUNT: #{count}
@@ -70,7 +74,7 @@ block content
             div(class="modal-content")
                 div(class="modal-header")
                     button(type="button" class="close" data-dismiss="modal" aria-label="Close")
-                        span(aria-hidden="true")&times;
+                        span(aria-hidden="true") &times;
                     h4(class="modal-title") 身份验证信息
                     .modal-body
                         form
@@ -84,9 +88,9 @@ block content
                             img(id="image2" src="" width="100%",heigth="100%")
                             h3 状态
                             select(id="certified")
-                                option(value="1")正在审核
-                                option(value="2")通过审核
-                                option(value="3")不通过审核
+                                option(value="1") 正在审核
+                                option(value="2") 通过审核
+                                option(value="3") 不通过审核
                 .modal-footer
                     button(type="button" class="btn btn-default" data-dismiss="modal") close
                     button(type="button" id="certSubmit" class="btn btn-primary") submit
