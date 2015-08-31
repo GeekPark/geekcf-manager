@@ -43,8 +43,8 @@ block content
                 td= format(order.added)
                 td
                     if order.state === 0
-                        a(href='#' onclick="changeState('#{order._id}',2)") 通过
-                        a(href='#' onclick="changeState('#{order._id}',3)") 拒绝
+                        a(href='javascript:void(0)' onclick="changeState('#{order._id}',2)") 通过
+                        a(href='javascript:void(0)' onclick="changeState('#{order._id}',3)") 拒绝
                     a(href='/order/#{order._id}/delete') 删除
 
 
