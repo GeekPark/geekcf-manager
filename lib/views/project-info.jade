@@ -78,6 +78,11 @@ block content
             label(for='owner') 项目所属人：
             input#owner(name='owner',size=30,value='#{project.owner || ""}')
         p
+            label(for='intro') 一句话介绍：
+        p
+            textarea#intro(name='intro',cols=50,rows=10)= project.intro
+
+        p
             label(for='payPoint') 支付描述：
         p
             textarea#payPoint(name='payPoint',cols=50,rows=10)= project.payPoint
