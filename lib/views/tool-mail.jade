@@ -1,6 +1,15 @@
 extends _layout
 
 block content
+    script(src='/module.min.js')
+    script(src='/uploader.min.js')
+    script(src='/hotkeys.min.js')
+    script(src='/simditor.min.js')
+    script(src='/beautify-html.js')
+    script(src='/simditor-html.js')
+    link(rel='stylesheet',href='/simditor.css')
+    link(rel='stylesheet',href='/simditor-html.css')
+
     h2 发送邮件
     form(method='POST')
         p 选择群组：
@@ -19,10 +28,10 @@ block content
             label(for='subject') 邮件标题：
             input#subject(name='subject',size=50)
         p
-            邮件内容：
+            label(for='text') 邮件内容：
             span#output Result Info...
         p
-            textarea(name='text',cols=70,rows=10)
+            textarea#text(name='text',cols=70,rows=10)
         p
             input(type='submit',value='SEND')
             a(href='/tool') CANCEL
@@ -36,3 +45,29 @@ block content
                 });
             }
         });
+
+        var editor = new Simditor({
+            textarea: $('#text'),
+            toolbar: [
+                'title', 'bold', 'italic', 'underline',
+                'strikethrough', 'color', 'ol', 'ul',
+                'blockquote', 'code', 'table', 'link',
+                'image', 'hr', 'indent', 'outdent', 'alignment', 'html'
+            ],
+            upload: {
+                url: '#{uploadAPI}?token=#{token}',
+                fileKey: 'uploadFile'
+            },
+            allowedTags: [
+                'br', 'a', 'img', 'b', 'strong', 'i', 'u', 'font', 'hr', 'embed', 'iframe',
+                'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'hr'
+            ],
+            allowedAttributes: {
+                img: ['src', 'alt', 'width', 'height', 'data-non-image'],
+                a: ['href', 'target'],
+                font: ['color'],
+                code: ['class'],
+                embed: ['src', 'quality','width', 'height', 'align', 'allowScriptAccess', 'allowFullScreen', 'mode', 'type'],
+                iframe: ['width', 'height', 'src', 'frameborder', 'allowfullscreen']
+                    }
+            });
