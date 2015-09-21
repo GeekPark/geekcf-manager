@@ -33,7 +33,7 @@ block content
         p
             label(for='alias') 别名：
             input#alias(name='alias',value='#{project.alias}')
-            a(href="http://#{domain}/project/#{project.alias}") 预览
+            a(href='http://#{domain}/project/#{project.alias}', target='_blank') 预览
         p
             label(for='turn') 融资轮次：
             select#turn(name='turn')
