@@ -1,0 +1,12 @@
+extends _layout
+
+block content
+    h2 项目
+    p
+        a(href='/text/new') 增加新的文本
+        ol
+            each text, index in texts.length ? texts : ['nothing...']
+                li
+                    if text._id
+                        a(href='/text/#{text._id}/info') EDIT
+                    strong= text.title || text
