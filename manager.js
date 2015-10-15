@@ -40,8 +40,8 @@ function start() {
 
     // checkin
     app.use(function(req, res, next) {
-        var token = req.signedCookies.t,
-            admin = JSON.parse(base.file.read(base.config.confPath + 'admin.json') || '[]');
+        var token = req.signedCookies.t;
+        var admin = JSON.parse(base.file.read(base.config.confPath + 'admin.json') || '[]');
 
         base.token.decoded(token, function(err, user) {
             var ckuid = user && user.hasOwnProperty('_id') ? user._id : user;
@@ -68,7 +68,9 @@ function start() {
     app.use('/tool', require('./lib/routers/tool'));
     app.use('/order',require('./lib/routers/order'));
     app.use('/invite',require('./lib/routers/invite'));
+    app.use('/text',require('./lib/routers/staticText'));
     app.use('/*', require('./lib/routers/home'));
+
 
     util.error('=========================================');
     util.error('|-.-|  ~ GEEK CF Manager Service ~  |-.-|');
