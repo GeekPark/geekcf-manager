@@ -69,6 +69,7 @@ function start() {
     app.use('/order',require('./lib/routers/order'));
     app.use('/invite',require('./lib/routers/invite'));
     app.use('/text',require('./lib/routers/staticText'));
+    app.use('/applying',require('./lib/routers/applyingData'));
     app.use('/*', require('./lib/routers/home'));
 
 

@@ -4,7 +4,7 @@ block content
     h2 邀请码用户信息
     p
         a(href='/invite') 返回
-    table(width='100%')
+    table.table.table-bordered.table-hover
         tr
             th No.
             th 用户名
@@ -16,7 +16,7 @@ block content
             th 加入时间
         each user, index in users
             tr
-                td.num= index + 1
+                td= index + 1
                 td= user.username
                 td= user.email
                 td= user.mobile

@@ -7,7 +7,7 @@ block content
         input#nums(name='nums',size='10')
         input(type='submit',value='CREATE')
     p
-        table(width='100%')
+        table.table.table-bordered.table-hover
             tr
                 th No.
                 th 邀请码
@@ -19,7 +19,7 @@ block content
                 th 用户
             each invite, index in invites
                 tr
-                    td.num= index + 1
+                    td= index + 1
                     td= invite.code
                     td= invite.nums
                     td= invite.users.length

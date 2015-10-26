@@ -8,21 +8,35 @@ html(lang='en')
     script(src='/core.js')
     script(src='/jquery-ui.min.js')
     script(src='/jquery.selection.js')
+    script(src='/bootstrap.min.js')
+    link(rel='stylesheet',href='/bootstrap.min.css')
     link(rel='stylesheet',href='/main.css')
   body
-    #main
-      h1 Manager - geeks.vc
-      mixin menu(url, title)
-        li: a(href=url)= title
-      ul#menu
-        +menu('/', '首页')
-        +menu('/project', '项目')
-        +menu('/text','静态文本')
-        +menu('/user', '用户')
-        +menu('/invite', '邀请码')
-        +menu('/tool', '工具')
-      br.clear
+    header(class="navbar navbar-fixed-top bs-docs-nav")
+      .container
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li(role="presentation" )
+              a(href='/') 首页
+            li(role="presentation" )
+              a(href='/project') 项目
+            li(role="presentation" )
+              a(href='/text') 静态文本
+            li(role="presentation" )
+              a(href='/applying') 申请资料
+            li(role="presentation" )
+              a(href='/user') 用户
+            li(role="presentation" )
+              a(href='/invite') 邀请码
+            li(role="presentation" )
+              a(href='/tool') 工具
+    p.clear
+    .bs-docs-header
+      .container
+        h1 Manager
+        p - geeks.vc好用的不能再好用了
+    #main.container-fluid
       block content
-    p.copy
-      | copyright &copy; 2015 
-      a(href="http://geeks.vc/",target="_blank") geeks.vc
+      p.copy
+        | copyright &copy; 2015 
+        a(href="http://geeks.vc/",target="_blank") geeks.vc

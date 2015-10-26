@@ -1,9 +1,6 @@
 extends _layout
 
 block content
-    script(src='/bootstrap.min.js')
-    link(rel='stylesheet',href='/bootstrap.min.css')
-
     h2 用户
     a(href='/user/export',target='_blank') 导出投资人
     form
@@ -19,7 +16,7 @@ block content
         input#q(name='q',size=10,value='#{q || ""}',placeholder='关键字')
         input(type='submit',value='Search')
     p
-        table(width='100%')
+        table.table.table-bordered.table-hover
             tr
                 th No.
                 th ID
@@ -34,7 +31,7 @@ block content
                 th 实名认证状态
             each user, index in users
                 tr
-                    td.num= index + 1 + (p - 1) * c
+                    td= index + 1 + (p - 1) * c
                     td
                         strong= user._id
                     td= user.username + (user.isVIP ? '*' : '')

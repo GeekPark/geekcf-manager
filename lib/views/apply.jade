@@ -1,0 +1,81 @@
+extends _layout
+
+block content
+    .page-header
+        h3 申请资料
+    table.table.table-bordered.table-hover
+        tr
+            th ID
+            th 项目名称
+            th 公司名称
+            th 公司邮箱
+            th 联系人姓名
+            th 联系电话
+            th 操作
+        each data in list
+            tr
+                td 
+                    a(href='') #{data._id}
+                td #{data.projectName}
+                td #{data.companyName}
+                td #{data.companyEmail}
+                td #{data.userName}
+                td #{data.phoneNumber}
+                td 
+                    a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=data) 查看
+        tr
+            td(colspan='7',style='text-alin:right')
+                if hasPre
+                    a(href='?current=#{current-1}') pre
+                if hasNext
+                    a(href='?current=#{current+1}') next
+                span 共有#{count}页
+
+    div(class="modal fade " id="dialogModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title") 身份验证信息
+                    .modal-body
+                        form
+                            h3 项目名称
+                            h4(id="projectName")
+                            h3 公司名称
+                            h4(id="companyName")
+                            h3 联系人姓名
+                            h4(id='userName')
+                            h3 联系电话
+                            h4(id='phoneNumber')
+                            h3 公司邮箱 
+                            h4(id='companyEmail')
+                            h3 简介
+                            p(id='describe',style='word-break: break-all;')   
+                            h3 附件
+                            div(id='files1',style='word-break: break-all;')
+                            
+                .modal-footer
+                    button(type="button" class="btn btn-default" data-dismiss="modal") close
+                    button(type="button" id="certSubmit" class="btn btn-primary") submit
+    script.
+        $('#dialogModel').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var data = button.data('whatever') 
+            //不写ajax了
+            var modal = $(this)
+            modal.find('#projectName').text(data.projectName);
+            modal.find('#companyName').text(data.companyName);
+            modal.find('#phoneNumber').text(data.phoneNumber);
+            modal.find('#companyEmail').text(data.companyEmail);
+            modal.find('#describe').text(data.describe);
+            if (data.files) {
+                var files = '';
+                for(var i=0;i<data.files.length;i++){
+                    files += '<a href="'+data.files[i]+'" download="">'+data.files[i]+'</a>' 
+                }
+                $('#files1').html(files); 
+            }
+        });
+                                   
+

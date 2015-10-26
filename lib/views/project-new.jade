@@ -9,77 +9,82 @@ block content
     script(src='/simditor-html.js')
     link(rel='stylesheet',href='/simditor.css')
     link(rel='stylesheet',href='/simditor-html.css')
-
-    h2 添加新项目
-    form(method='POST')
-        p
-            label(for='title') 项目标题：
-            input#title(name='title')
-        p
-            label(for='icon') 项目图标：
-            input#icon(name='icon', size=50)
-        p
-            label(for='cover') 封面图片：
-            input#cover(name='cover', size=50)
-        p
-            label(for='area') 地区：
-            input#area(name='area')
-        p
-            label(for='alias') 别名：
-            input#alias(name='alias')
-        p
-            label(for='turn') 融资轮次：
-            select#turn(name='turn')
-                each value, index in turns
-                    option(value=index)= value + ' 轮'
-        p
-            label(for='totalValue') 估值：
-            input#totalValue(name='totalValue')
-        p
-            label(for='percent') 出让比例：
-            input#percent(name='percent')
-            span.cover %
-        p
-            label(for='targetValue') 融资金额：
-            input#targetValue(name='targetValue')
-        p
-            label(for='minTarget') 最小额度：
-            input#minTarget(type='number',name='minTarget')
-        p
-            label(for='maxTarget') 最大额度：
-            input#maxTarget(type='number',name='maxTarget')
-        p
-            label(for='readyDate') 预认购时间：
-            input#readyDate(type='date',name='readyDate')
-        p
-            label(for='openDate') 认购时间：
-            input#openDate(name='openDate',type='date')
-        p
-            label(for='closeDate') 结束时间：
-            input#closeDate(name='closeDate',type='date')
-        p
-            label 资源需求：
-            each skill, key in skills
-                input(id='skill#{key}',name='skills',type='checkbox',value='#{key}')
-                label(for='skill#{key}')= skill
-        p
-            label(for='owner') 项目所属人：
-            input#owner(name='owner',size=30)
-        p
-            label(for='intro') 一句话介绍：
-        p
-            textarea#intro(name='intro',cols=50,rows=10)
-        p
-            label(for='content') 项目介绍：
-        p
-            textarea#content(name='content',cols=50,rows=10)
-        p
-            label(for='payPoint') 支付描述：
-        p
-            textarea#payPoint(name='payPoint',cols=50,rows=10)
-        p
-        input(type='submit',value='SUBMIT')
-        a(href='/project') CANCEL
+    .container-fluid
+        .row
+            .col-md-12
+                .panel.panel-default
+                    .panel-heading
+                        h2 添加新项目
+                    .panel-body
+                        form(method='POST')
+                            .form-group
+                                label(for='title') 项目标题：
+                                input#title(name='title').form-control
+                            .form-group
+                                label(for='icon') 项目图标：
+                                input#icon(name='icon', size=50).form-control
+                            .form-group
+                                label(for='cover') 封面图片：
+                                input#cover(name='cover', size=50).form-control
+                            .form-group
+                                label(for='area') 地区：
+                                input#area(name='area').form-control
+                            .form-group
+                                label(for='alias') 别名：
+                                input#alias(name='alias').form-control
+                            .form-group
+                                label(for='turn') 融资轮次：
+                                select#turn(name='turn').form-control
+                                    each value, index in turns
+                                        option(value=index)= value + ' 轮'
+                            .form-group
+                                label(for='totalValue') 估值：
+                                input#totalValue(name='totalValue').form-control
+                            .form-group
+                                label(for='percent') 出让比例：
+                                input#percent(name='percent')
+                                span.cover %
+                            .form-group
+                                label(for='targetValue') 融资金额：
+                                input#targetValue(name='targetValue').form-control
+                            .form-group
+                                label(for='minTarget') 最小额度：
+                                input#minTarget(type='number',name='minTarget').form-control
+                            .form-group
+                                label(for='maxTarget') 最大额度：
+                                input#maxTarget(type='number',name='maxTarget').form-control
+                            .form-group
+                                label(for='readyDate') 预认购时间：
+                                input#readyDate(type='date',name='readyDate').form-control
+                            .form-group
+                                label(for='openDate') 认购时间：
+                                input#openDate(name='openDate',type='date').form-control
+                            .form-group
+                                label(for='closeDate') 结束时间：
+                                input#closeDate(name='closeDate',type='date').form-control
+                            .form-group
+                                label 资源需求：
+                                each skill, key in skills
+                                    input(id='skill#{key}',name='skills',type='checkbox',value='#{key}')
+                                    label(for='skill#{key}')= skill
+                            .form-group
+                                label(for='owner') 项目所属人：
+                            .form-group
+                                input#owner(name='owner',size=30).form-control
+                            .form-group
+                                label(for='intro') 一句话介绍：
+                            .form-group
+                                textarea#intro(name='intro',cols=50,rows=10)
+                            .form-group
+                                label(for='content') 项目介绍：
+                            .form-group
+                                textarea#content(name='content',cols=50,rows=10)
+                            .form-group
+                                label(for='payPoint') 支付描述：
+                            .form-group
+                                textarea#payPoint(name='payPoint',cols=50,rows=10)
+                            input(type='submit',value='SUBMIT')
+                            a(href='/project') CANCEL
 
         script.
             var editor = new Simditor({
