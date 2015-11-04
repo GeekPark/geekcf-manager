@@ -66,6 +66,7 @@ function start() {
     app.use('/project', require('./lib/routers/project'));
     app.use('/user', require('./lib/routers/user'));
     app.use('/tool', require('./lib/routers/tool'));
+    app.use('/data', require('./lib/routers/data'));
     app.use('/order',require('./lib/routers/order'));
     app.use('/invite',require('./lib/routers/invite'));
     app.use('/text',require('./lib/routers/staticText'));
