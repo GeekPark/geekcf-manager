@@ -110,8 +110,8 @@ block content
          p
             label(for='isPause') 是否暂停:
             select(name='isPause',value='#{project.isPause}')
-                option(value="true",selected=project.isPause) 显示
-                option(value="false",selected=project.isPause == false) 不显示
+                option(value="true",selected=project.isPause) 暂停
+                option(value="false",selected=project.isPause == false) 不暂停
         p
             input(type='submit',value='SUBMIT')
             a(href='/project' ) CANCEL
