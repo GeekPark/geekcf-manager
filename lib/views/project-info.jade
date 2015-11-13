@@ -25,6 +25,9 @@ block content
             label(for='icon') 项目图标：
             input#icon(name='icon',size=50,value='#{project.icon}')
         p
+            label(for='pageCover') 首页图片：
+            input#cover(name='pageCover',size=50,value='#{project.pageCover}')
+        p
             label(for='cover') 封面图片：
             input#cover(name='cover',size=50,value='#{project.cover}')
         p
@@ -86,6 +89,10 @@ block content
             label(for='mobileIntro') 手机版一句话介绍：
         p
             textarea#intro(name='mobileIntro',cols=50,rows=10)= project.mobileIntro
+        p
+            label(for='shortIntro') 半句话介绍：
+        p
+            textarea#intro(name='shortIntro',cols=50,rows=10)= project.shortIntro
 
         p
             label(for='payPoint') 支付描述：
@@ -96,8 +103,18 @@ block content
         p
             textarea#content(name='content',cols=50,rows=10)= project.content
         p
+            label(for='isShow') 是否显示在首页:
+            select(name='isShow',value='#{project.isShow}')
+                option(value="true",selected=project.isShow) 显示
+                option(value="false",selected=project.isShow == false) 不显示
+         p
+            label(for='isPause') 是否暂停:
+            select(name='isPause',value='#{project.isPause}')
+                option(value="true",selected=project.isPause) 显示
+                option(value="false",selected=project.isPause == false) 不显示
+        p
             input(type='submit',value='SUBMIT')
-            a(href='/project') CANCEL
+            a(href='/project' ) CANCEL
 
     script.
         var editor = new Simditor({
