@@ -1,0 +1,11 @@
+extends _layout
+
+block content
+
+    h2 管理员
+    form(method='POST')
+        p
+            textarea#text.form-control(name='text',value='#{admins}',rows=10)
+        p
+            input(type='submit',value='SEND')
+            a(href='/tool') CANCEL
