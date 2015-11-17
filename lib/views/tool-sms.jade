@@ -12,20 +12,22 @@ block content
             label(for='testMobile') 测试手机号：
             input#testMobile(name='testMobile',size=30)
         p 选择模版：
-        table(width='100%')
-            tr
-                th 选择
-                th 模版ID
-                th 模版内容
-                th 模版状态
-            each tpl in template
-                if tpl.tpl_content.indexOf('#') === -1
-                    tr
-                        td
-                            input(name='text',value='#{tpl.tpl_content}',type='radio')
-                        td.num= tpl.tpl_id
-                        td= tpl.tpl_content
-                        td= tpl.check_status
+        table.table.table-bordered.table-hover
+            thead
+                tr
+                    th 选择
+                    th 模版ID
+                    th 模版内容
+                    th 模版状态
+            tbody
+                each tpl in template
+                    if tpl.tpl_content.indexOf('#') === -1
+                        tr
+                            td
+                                input(name='text',value='#{tpl.tpl_content}',type='radio')
+                            td.num= tpl.tpl_id
+                            td= tpl.tpl_content
+                            td= tpl.check_status
         p
             input(type='submit',value='SEND')
             a(href='/tool') CANCEL

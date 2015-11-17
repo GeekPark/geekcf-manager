@@ -2,6 +2,8 @@ doctype html
 html(lang='en')
   head
     meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible',content='IE=edge')
+    meta(name='viewport',content='width=device-width, initial-scale=1')
     title Manager - geeks.vc
     script(src='/jquery.min.js')
     script(src='/jquery.cookie.js')
@@ -37,7 +39,7 @@ html(lang='en')
         h1 Manager
         p - geeks.vc好用的不能再好用了
     #main.container-fluid
-      block content
-      p.copy
+        block content
+    p.copy
         | copyright &copy; 2015 
         a(href="http://geeks.vc/",target="_blank") geeks.vc
