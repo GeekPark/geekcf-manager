@@ -30,7 +30,7 @@ block content
                 td= order.user.position
                 td= order.user.mobile
                 td.num
-                    if planAmount === 0
+                    if order.planAmount === 0
                         span #{order.amount}
                     else
                         span #{order.planAmount}
