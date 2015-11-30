@@ -15,7 +15,8 @@ block content
             th 公司
             th 职位
             th 电话
-            th 认购金额
+            th 拟认购金额
+            th 实际认购金额
             th 订单状态
             th 下单时间
             th 操作
@@ -28,6 +29,12 @@ block content
                 td= order.user.company
                 td= order.user.position
                 td= order.user.mobile
+                td.num
+                    if planAmount === 0
+                        span #{order.amount}
+                    else
+                        span #{order.planAmount}
+
                 td.num= order.amount
                 td 
                     if order.state === 0
@@ -43,15 +50,37 @@ block content
                 td= format(order.added)
                 td
                     if order.state === 0
-                        a(href='javascript:void(0)' onclick="changeState('#{order._id}',2)") 通过
-                        a(href='javascript:void(0)' onclick="changeState('#{order._id}',3)") 拒绝
+                        a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=order) 通过
+                        a(href='javascript:void(0)' onclick="changeState('#{order._id}',3,0)") 拒绝
                     a(href='/order/#{order._id}/delete') 删除
+
+    div(class="modal fade " id="dialogModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title") 确认订单信息
+                    .modal-body
+                        form
+                            input(type="hidden" id="orderId")
+                            h3 姓名
+                            h4(id="realname")
+                            h3 拟认购金额
+                            h4(id="planAmount")
+                            h3 实际认购金额
+                            input(id="amount")
+                .modal-footer
+                    button(type="button" class="btn btn-default" data-dismiss="modal") 关闭
+                    button(type="button" id="passOrder" class="btn btn-primary") 通过
+
 
 
     script.
-        function changeState(id,state){
+        function changeState(id,state,amount){
+            var message = '';
             if(state === 2){
-                message = '确认通过审核订单号:'+id+'通过后不能撤销';
+                message = '确认通过审核订单号:'+id+'通过后不能撤销,还会发一封邮件，请确认后再操作';
             } else if(state === 3){
                 message = '确认拒绝订单号: '+id+' 拒绝后不能撤销';
             }else{
@@ -60,6 +89,9 @@ block content
             if(confirm(message)){
                 var body = {};
                 body.state = state;
+                if(state === 2){
+                    body.amount = amount;
+                }
                 $.ajax({
                     url: "/order/"+id+"/state",
                     data: body,
@@ -71,4 +103,24 @@ block content
             }
            
         }
+
+        $('#dialogModel').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var order = button.data('whatever') 
+            if(planAmount == 0){
+                order.planAmount = order.amount;
+            }
+            //不写ajax了
+            var modal = $(this)
+            modal.find('#realname').text(order.user.realname);
+            modal.find('#planAmount').text(order.planAmount);
+            modal.find('#amount').val(order.amount);
+            modal.find('#orderId').val(order._id);
+        });
+
+        $('#passOrder').on('click',function(evt){
+            var amount = $('#amount').val();
+            var id = $('#orderId').val();
+            changeState(id,2,amount);
+        });
 
