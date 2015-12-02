@@ -71,6 +71,7 @@ function start() {
     app.use('/invite',require('./lib/routers/invite'));
     app.use('/text',require('./lib/routers/staticText'));
     app.use('/applying',require('./lib/routers/applyingData'));
+    app.use('/meruser',require('./lib/routers/merUser'));
     app.use('/*', require('./lib/routers/home'));
 
 

@@ -1,0 +1,23 @@
+extends _layout
+
+block content
+    h2 联动用户
+
+    table.table.table-bordered.table-hover
+        tr
+            th 联动用户id
+            th 用户姓名
+            th 手机
+            th 银行卡号
+            th 银行类型
+            th 身份证号
+            th 账户余额
+        each merUser in list
+            tr 
+                td #{merUser.merUserId}
+                td #{merUser.merCustName}
+                td #{merUser.mobile}
+                td #{merUser.bindingCard?merUser.bindingCard.cardId:null}
+                td #{merUser.bindingCard?merUser.bindingCard.type:'null'}
+                td #{merUser.certNo}
+                td #{merUser.balance/100}
