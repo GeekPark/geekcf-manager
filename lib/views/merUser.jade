@@ -12,6 +12,7 @@ block content
             th 银行类型
             th 身份证号
             th 账户余额
+            th 状态
         each merUser in list
             tr 
                 td #{merUser.merUserId}
@@ -21,3 +22,17 @@ block content
                 td #{merUser.bindingCard?merUser.bindingCard.type:'null'}
                 td #{merUser.certNo}
                 td #{merUser.balance/100}
+                td 
+                    if merUser.status === 0
+                        span 注册中
+                    else if merUser.status === 1
+                        span 未绑定银行卡
+                    else if merUser.status === 2
+                        span 已绑定
+        tr
+            td(colspan='8',style='text-alin:right')
+                if hasPre
+                    a(href='?current=#{current-1}') pre
+                if hasNext
+                    a(href='?current=#{current+1}') next
+                span 共有#{count}页
