@@ -8,16 +8,16 @@ block content
         a(href='/project') 返回
     table.table.table-bordered.table-hover
         tr
-            th 订单号
-            th 姓名
-            th 邮箱
-            th 公司
-            th 职位
-            th 电话
-            th 拟认购金额
-            th 实际认购金额
-            th 订单状态
-            th 操作
+            th(nowrap="nowrap") 订单号
+            th(nowrap="nowrap") 姓名
+            th(nowrap="nowrap") 邮箱
+            th(nowrap="nowrap") 公司
+            th(nowrap="nowrap") 职位
+            th(nowrap="nowrap") 电话
+            th(nowrap="nowrap") 拟认购金额
+            th(nowrap="nowrap") 实际认购金额
+            th(nowrap="nowrap") 订单状态
+            th(nowrap="nowrap") 操作
         each order, index in orders
             tr
                 td= order._id
@@ -33,7 +33,7 @@ block content
                         span #{order.planAmount}
 
                 td.num= order.amount
-                td
+                td(nowrap="nowrap")
                     if order.state === 0
                         span 意向
                     else if order.state === 1
