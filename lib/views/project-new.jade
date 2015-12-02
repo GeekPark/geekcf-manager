@@ -66,6 +66,9 @@ block content
                                 label(for='closeDate') 结束时间：
                                 input#closeDate(name='closeDate',type='date').form-control
                             .form-group
+                                label(for='closePayDate') 结束付款时间：
+                                input#closePayDate(name='closePayDate',type='date').form-control
+                            .form-group
                                 label 资源需求：
                                 each skill, key in skills
                                     input(id='skill#{key}',name='skills',type='checkbox',value='#{key}')
