@@ -8,7 +8,6 @@ block content
         a(href='/project') 返回
     table.table.table-bordered.table-hover
         tr
-            th No.
             th 订单号
             th 姓名
             th 邮箱
@@ -18,13 +17,11 @@ block content
             th 拟认购金额
             th 实际认购金额
             th 订单状态
-            th 下单时间
             th 操作
         each order, index in orders
             tr
-                td.num= index + 1
                 td= order._id
-                td= order.user.realname
+                td(nowrap="nowrap")= order.user.realname
                 td= order.user.email
                 td= order.user.company
                 td= order.user.position
@@ -36,7 +33,7 @@ block content
                         span #{order.planAmount}
 
                 td.num= order.amount
-                td 
+                td
                     if order.state === 0
                         span 意向
                     else if order.state === 1
@@ -47,8 +44,7 @@ block content
                         span 被拒绝
                     else if order.state === 4
                         span 退款
-                td= format(order.added)
-                td
+                td(nowrap="nowrap")
                     if order.state === 0
                         a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=order) 通过
                         a(href='javascript:void(0)' onclick="changeState('#{order._id}',3,0)") 拒绝
