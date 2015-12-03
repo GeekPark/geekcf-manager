@@ -19,7 +19,7 @@ block content
                 td #{merUser.merCustName}
                 td #{merUser.mobile}
                 td #{merUser.bindingCard?merUser.bindingCard.cardId:null}
-                td #{merUser.bindingCard?merUser.bindingCard.type:'null'}
+                td #{merUser.bindingCard?merUser.bindingCard.type:null}
                 td #{merUser.certNo}
                 td #{merUser.balance/100}
                 td 
@@ -32,7 +32,7 @@ block content
         tr
             td(colspan='8',style='text-alin:right')
                 if hasPre
-                    a(href='?current=#{current-1}') pre
+                    a(href='?current=#{parseInt(current)-1}') pre
                 if hasNext
-                    a(href='?current=#{current+1}') next
+                    a(href='?current=#{parseInt(current)+1}') next
                 span 共有#{count}页

@@ -26,9 +26,9 @@ block content
         tr
             td(colspan='7',style='text-alin:right')
                 if hasPre
-                    a(href='?current=#{current-1}') pre
+                    a(href='?current=#{parseInt(current)-1}') pre
                 if hasNext
-                    a(href='?current=#{current+1}') next
+                    a(href='?current=#{parseInt(current)+1}') next
                 span 共有#{count}页
 
     div(class="modal fade " id="dialogModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel")
