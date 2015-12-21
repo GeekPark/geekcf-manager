@@ -1,0 +1,42 @@
+extends _layout
+
+block content
+    h2 上传合同文件
+    include project-nav.jade
+    each item in list
+        +createForm(item)
+    +createForm(null)
+
+mixin createForm(item)
+    - var id = item ? item._id : '';
+    if error
+        .text-danger= error
+    form(method='POST',enctype='multipart/form-data')
+        if id
+            input(name='id', type="hidden", value=id)
+            input(name='pid', type="hidden", value=item.project)
+        hr
+        p
+            label(for='filename' + id) 文件名
+            input(
+                id="filename" + id
+                name='filename'
+                size=50
+                value=item && item.filename
+                placeholder='压缩包中显示的文件名'
+            )
+        p
+            label(for='uploadFile' + id) 合同文件
+            input(id="uploadFile" + id,name='uploadFile',type='file')
+        p
+            label(for='data' + id) 替换数据
+            input(
+                id="data" + id
+                size=50
+                name='data'
+                value=item && item.data
+                placeholder='举例：keyA:valueA,keyB:valueB（无替换数据请留空）'
+            )
+        input(type="submit", value=item ? "修改" : "提交")
+        if id
+            a(href='/project/' + item.project + '/contract/' + id + '/delete')删除

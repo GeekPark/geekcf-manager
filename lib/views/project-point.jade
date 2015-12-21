@@ -11,12 +11,7 @@ block content
     link(rel='stylesheet',href='/simditor-html.css')
 
     h2 修改项目投资亮点
-    p
-        a(href='info') 基础信息
-        a(href='product') 产品信息
-        a(href='point') 投资亮点
-        a(href='team') 团队信息
-        a(href='activity') 活动信息
+    include project-nav.jade
     form(method='POST')
         p
             label(for='point') 投资亮点：
