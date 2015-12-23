@@ -46,11 +46,35 @@ block content
                         span 退款
                 td(nowrap="nowrap")
                     if order.state === 0
-                        a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=order) 通过
-                        a(href='javascript:void(0)' onclick="changeState('#{order._id}',3,0)") 拒绝
+                        a(href='#' data-toggle="modal" data-target="#chckOrderModel" data-whatever=order) 通过
+                        a(href='javascript:void(0)' onclick="changeState('#{order._id}',3,0,null,null)") 拒绝
+                    if order.state === 2
+                        a(href='#' data-toggle="modal" data-target="#transferModel" data-whatever=order) 通过银行转账付款
                     a(href='/order/#{order._id}/delete') 删除
 
-    div(class="modal fade " id="dialogModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel")
+    div(class="modal fade " id="transferModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title") 确认银行转账信息
+                    .modal-body
+                        form
+                            input(type="hidden" id="orderId")
+                            h3 用户姓名
+                            h4(id="realname")
+                            h3 转账金额
+                            input(id="amount",class = 'form-control') 
+                            h3 银行转账流水号
+                            input(id='payId',class = 'form-control')
+                            h3 银行名称
+                            input(id='bankType',class = 'form-control')
+                .modal-footer
+                    button(type="button" class="btn btn-default" data-dismiss="modal") 关闭
+                    button(type="button" id="passTransfer" class="btn btn-primary") 提交
+
+    div(class="modal fade " id="chckOrderModel" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel")
         div(class="modal-dialog" role="document")
             div(class="modal-content")
                 div(class="modal-header")
@@ -60,12 +84,12 @@ block content
                     .modal-body
                         form
                             input(type="hidden" id="orderId")
-                            h3 姓名
-                            h4(id="realname")
+                            h3 用户姓名
+                            h4(id="realname",class = 'form-control')
                             h3 拟认购金额
-                            h4(id="planAmount")
+                            h4(id="planAmount",class = 'form-control')
                             h3 实际认购金额
-                            input(id="amount")
+                            input(id="amount",class = 'form-control')
                 .modal-footer
                     button(type="button" class="btn btn-default" data-dismiss="modal") 关闭
                     button(type="button" id="passOrder" class="btn btn-primary") 通过
@@ -73,10 +97,12 @@ block content
 
 
     script.
-        function changeState(id,state,amount){
+        function changeState(id,state,amount,payId,bankType){
             var message = '';
-            if(state === 2){
-                message = '确认通过审核订单号:'+id+'通过后不能撤销,还会发一封邮件，请确认后再操作';
+            if (state === 1){
+                message = '确认通过订单号:'+id+'后不能撤销,还会发一封邮件，请确认后再操作';
+            }else if(state === 2){
+                message = '确认通过审核订单号:'+id+'后不能撤销,还会发一封邮件，请确认后再操作';
             } else if(state === 3){
                 message = '确认拒绝订单号: '+id+' 拒绝后不能撤销';
             }else{
@@ -85,7 +111,11 @@ block content
             if(confirm(message)){
                 var body = {};
                 body.state = state;
-                if(state === 2){
+                if (state === 1) {
+                    body.payId = payId;
+                    body.bankType = bankType;
+                    body.amount = amount;
+                } else if(state === 2){
                     body.amount = amount;
                 }
                 $.ajax({
@@ -100,7 +130,7 @@ block content
            
         }
 
-        $('#dialogModel').on('show.bs.modal', function (event) {
+        $('#chckOrderModel').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var order = button.data('whatever') 
             if(order.planAmount == 0){
@@ -115,8 +145,50 @@ block content
         });
 
         $('#passOrder').on('click',function(evt){
-            var amount = $('#amount').val();
-            var id = $('#orderId').val();
-            changeState(id,2,amount);
+            var modal = $('#chckOrderModel');
+            var amount = modal.find('#amount').val();
+            var id = modal.find('#orderId').val();
+            var planAmount = modal.find('#planAmount').val();
+
+            if (isNaN(amount)) {
+                alert('实际认购金额，请输入数字!');
+                return
+            } else {
+                changeState(id,2,amount,null,null);
+            }
+        });
+
+        $('#transferModel').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var order = button.data('whatever') 
+
+            var modal = $(this)
+            modal.find('#realname').text(order.user.realname);
+            modal.find('#payId').text('');
+            modal.find('#bankType').text('');
+
+            modal.find('#amount').val(order.amount);
+            modal.find('#orderId').val(order._id);
+        });
+
+        $('#passTransfer').on('click',function(evt){
+            var modal = $('#transferModel');
+            var amount = modal.find('#amount').val();
+            var id = modal.find('#orderId').val();
+            var payId = modal.find('#payId').val();
+            var bankType = modal.find('#bankType').val();
+            var reg = new RegExp("^\d+(\.\d{2})?$");
+
+            if (isNaN(amount)) {
+                alert('实际认购金额，请输入数字!');
+                return
+            } else if(!payId || payId.trim().length <=0) {
+                alert('流水号不能为空');
+                return
+
+            } else {
+                changeState(id,1,amount,payId,bankType);
+            }
+
         });
 
