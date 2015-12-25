@@ -1,0 +1,31 @@
+extends _layout
+
+block content
+    h2 订单付款统计
+    p
+        a(href='/project/#{projectId}/info') 项目信息
+        a(href='/project/#{projectId}/orders') 返回
+
+    table.table.table-bordered.table-hover
+        tr
+            th(nowrap="nowrap") 应付款
+            th(nowrap="nowrap") 已付款
+            th(nowrap="nowrap") 未付款
+            th(nowrap="nowrap") 应付款人数
+            th(nowrap="nowrap") 已付款人数
+            th(nowrap="nowrap") 未付款人数
+        tr 
+            td #{statistics.payable.sum}
+            td #{statistics.paid.sum}
+            td #{statistics.payable.sum - statistics.paid.sum}
+            td #{statistics.payable.count}
+            td #{statistics.paid.count}
+            td #{statistics.payable.count - statistics.paid.count}
+
+    p
+        a(href='/project/#{projectId}/orders/paid/details?type=payable') 应付款
+        a(href='/project/#{projectId}/orders/paid/details?type=unpaid') 未付款
+        a(href='/project/#{projectId}/orders/paid/details?type=paid') 已付款
+
+    include project-orders-list
+

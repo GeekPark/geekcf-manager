@@ -2,7 +2,12 @@ extends _layout
 
 block content
     h2 联动用户
-
+    form(class="form-inline",)
+        .form-group
+            input(name="q",class="form-control",value='#{q}',style='margin-right:3px')
+            button(type="submit",class="btn btn-primary")
+                搜索
+    br
     table.table.table-bordered.table-hover
         tr
             th 联动用户id
@@ -32,7 +37,13 @@ block content
         tr
             td(colspan='8',style='text-alin:right')
                 if hasPre
-                    a(href='?current=#{parseInt(current)-1}') pre
+                    if q
+                        a(href='?current=#{parseInt(current)-1}&q=#{q}') pre
+                    else
+                        a(href='?current=#{parseInt(current)-1}') pre
                 if hasNext
-                    a(href='?current=#{parseInt(current)+1}') next
+                    if q
+                        a(href='?current=#{parseInt(current)+1}&q=#{q}') next
+                    else
+                        a(href='?current=#{parseInt(current)+1}') next
                 span 共有#{count}页
