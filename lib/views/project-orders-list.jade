@@ -36,6 +36,8 @@ table.table.table-bordered.table-hover
                     else if order.state === 3
                         span 被拒绝
                     else if order.state === 4
+                        span 取消
+                    else if order.state === 5
                         span 退款
                 td(nowrap="nowrap")
                     span #{order.payType}
@@ -45,6 +47,7 @@ table.table.table-bordered.table-hover
                         a(href='javascript:void(0)' onclick="changeState('#{order._id}',3,0,null,null)") 拒绝
                     if order.state === 2
                         a(href='#' data-toggle="modal" data-target="#transferModel" data-whatever=order) 通过银行转账付款
+                        a(href='javascript:void(0)' onclick="changeState('#{order._id}',4,0,null,null)") 放弃
                     a(href='/order/#{order._id}/delete') 删除
 
     div(class="modal fade " id="transferModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel")
@@ -100,7 +103,9 @@ table.table.table-bordered.table-hover
                 message = '确认通过审核订单号:'+id+'后不能撤销,还会发一封邮件，请确认后再操作';
             } else if(state === 3){
                 message = '确认拒绝订单号: '+id+' 拒绝后不能撤销';
-            }else{
+            } else if (state === 4) {
+                message = '确认放弃订单号: '+id+' 放弃后不能撤销';
+            } else {
                 return;
             }
             if(confirm(message)){
