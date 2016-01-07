@@ -1,0 +1,23 @@
+extends _layout
+
+block content
+    h2 神秘项目图片管理
+    p
+        a(href='/mysterious/add') 新增
+        a(href='/project') 返回
+
+    table.table.table-bordered.table-hover
+        tr
+            th(nowrap="nowrap") 标题
+            th(nowrap="nowrap") 状态
+            th(nowrap="nowrap") 操作
+        each item in list
+            tr
+                td #{item.title}
+                td 
+                    if item.isShow
+                        显示
+                    else
+                        不显示
+                td
+                    a(href='/mysterious/#{item._id}/edit') 修改

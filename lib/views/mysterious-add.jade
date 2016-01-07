@@ -1,0 +1,52 @@
+extends _layout
+
+block content
+    .container-fluid
+        .row
+            .col-md-12
+                .panel.panel-default
+                    .panel-heading
+                        h2 添加神秘项目图片
+                    .panel-body
+                        form#form(method='POST' enctype="multipart/form-data")
+                            .form-group
+                                label(for='title') 标题：
+                                input#title(name='title').form-control
+                            .form-group
+                                label(for='image') 网页图片：
+                                input#image(name='image',type='file' accept="image/*")
+                            .form-group
+                                label(for='mobileImage') 手机图片：
+                                input#mobileImage(name='mobileImage', type='file' accept="image/*")
+                            .form-group
+                                label(for='cover') 是否显示：
+                                select(name='isShow')
+                                    option(value="true") 显示
+                                    option(value="false" selected="true") 不显示
+                            a#submit( class='btn btn-primary') 提交
+                            a(href='/project' class='btn btn-default') 返回
+    script.
+        $('#submit').click(function(event){
+            validate();
+        });
+
+        function validate(){
+            var image = $('#image').val();
+            var mobileImage = $('#mobileImage').val();
+            var title = $('#title').val();
+            if (title.trim().length<=0) {
+                alert('标题不能为空');
+                return;
+            }
+            if (!image) {
+                alert('图片不能为空');
+                return;
+            }
+            if(!mobileImage) {
+                alert('手机图片不能为空');
+                return;
+            }
+            $('#form').submit();
+
+        }
+
