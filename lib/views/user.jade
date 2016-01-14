@@ -3,6 +3,7 @@ extends _layout
 block content
     h2 用户
     a(href='/user/export?type=investor',target='_blank') 导出投资人
+    a(href='/user/export?type=notInvestor' target='_blank') 导出非投资人
     a(href='/user/export?type=all',target='_blank') 导出全部用户
     form
         | 过滤：
