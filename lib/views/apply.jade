@@ -24,7 +24,7 @@ block content
                 td #{data.userName}
                 td #{data.phoneNumber}
                 td 
-                    a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=data) 查看
+                    a(href='#' data-toggle="modal" data-target="#dialogModel" data-model=data) 查看
         tr
             td(colspan='7',style='text-alin:right')
                 if hasPre
@@ -63,9 +63,9 @@ block content
     script.
         $('#dialogModel').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
-            var data = button.data('whatever') 
+            var data = button.data('model'); 
             //不写ajax了
-            var modal = $(this)
+            var modal = $(this);
             modal.find('#projectName').text(data.projectName);
             modal.find('#companyName').text(data.companyName);
             modal.find('#phoneNumber').text(data.phoneNumber);
@@ -80,4 +80,3 @@ block content
             }
         });
                                    
-

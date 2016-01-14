@@ -55,13 +55,13 @@ block content
                             span 未申请
                         else if user.certified === 1
                             em(style='color:red') 申请 
-                            a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=user) 查看和修改
+                            a(href='#' data-toggle="modal" data-target="#dialogModel" data-model=user) 查看和修改
                         else if user.certified === 2
                             em(style='color:red') 审核通过
-                            a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=user) 查看和修改
+                            a(href='#' data-toggle="modal" data-target="#dialogModel" data-model=user) 查看和修改
                         else if user.certified === 3
                             em(style='color:red') 审核未通过
-                            a(href='#' data-toggle="modal" data-target="#dialogModel" data-whatever=user) 查看和修改
+                            a(href='#' data-toggle="modal" data-target="#dialogModel" data-model=user) 查看和修改
         a(href='?p=#{parseInt(p) - 1}' + (q ? '&q=#{q}' : '') + (t ? '&t=#{t}' : '')) PREV
         a(href='?p=#{parseInt(p) + 1}' + (q ? '&q=#{q}' : '') + (t ? '&t=#{t}' : '')) NEXT
         label COUNT: #{count}
@@ -103,11 +103,10 @@ block content
                 });
             });
         $('#dialogModel').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var user = button.data('whatever') 
-            console.log(user);
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var user = button.data('model'); 
             //不写ajax了
-            var modal = $(this)
+            var modal = $(this);
             modal.find('#realname').text(user.realname);
             modal.find('#certNo').text(user.certNo);
             modal.find('#image1').attr("src",user.certImages[0]);

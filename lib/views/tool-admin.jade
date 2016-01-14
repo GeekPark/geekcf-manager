@@ -3,10 +3,104 @@ extends _layout
 block content
 
     h2 管理员
-    form(method='POST')
-        p
-            textarea#text.form-control(name='text',rows=10)
-                | #{admins}
-        p
-            input(type='submit',value='SEND')
-            a(href='/tool') CANCEL
+    p
+        a(href='#' data-toggle="modal" data-target="#addModel") 新增
+        a(href='/tool/convert/admin') 导入
+    table.table.table-bordered.table-hover
+            tr
+                th 用户名
+                th 用户真实姓名
+                th 管理员类型
+                th 操作
+            each item in list
+                tr
+                    td #{item.user.username}
+                    td #{item.user.realname}
+                    td
+                        if item.role === 0
+                            普通管理员
+                        else
+                            超级管理员
+                    td
+                        a(href='javascript:void(0)',name='deleteButton',data-model=item) 删除
+                        a(href='#',data-toggle="modal",data-target="#editModel",data-model=item) 修改
+    
+    div(class="modal fade " id="addModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title") 新增管理员
+                    .modal-body
+                        form(id='addForm',method='POST')
+                            h3 用户ID
+                            input(id='user',name='user',class = 'form-control')
+                            h3 管理员类型
+                            select(id='role',name='role')
+                                option(value=0) 普通管理员
+                                option(value=1) 超级管理员
+                    .modal-footer
+                        button(type="button" class="btn btn-default" data-dismiss="modal") 关闭
+                        button(type="button" id="addAdmin" class="btn btn-primary") 通过
+                        
+    div(class="modal fade " id="editModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title") 修改管理员信息
+                    .modal-body
+                        form(id='editForm',method='PUT')
+                            input(id='aid',name='aid',type='hidden')
+                            h3 用户ID
+                            h4(id='user',name='user',class = 'form-control')
+                            h3 管理员类型
+                            select(id='role',name='role')
+                                option(value=0) 普通管理员
+                                option(value=1) 超级管理员
+                    .modal-footer
+                        button(type="button" class="btn btn-default" data-dismiss="modal") 关闭
+                        button(type="button" id="editAdmin" class="btn btn-primary") 通过
+        
+        script.
+            $('#addAdmin').on('click',function(event){
+                    $('#addForm').submit();
+            });
+            $('#editAdmin').on('click',function(event){
+                var form = $('#editForm');
+                var data = {};
+                data.role = form.find('#role').val();
+                data.aid = form.find('#aid').val();
+            
+                $.ajax({
+                   url: '/tool/admin',
+                   type: 'PUT',
+                   data:data,
+                   success: function(response) {
+                     location=location;
+                   }
+                });
+            });
+            $('#editModel').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var admin = button.data('model'); 
+                var modal = $(this);
+                modal.find('#aid').val(admin._id);
+                modal.find('#role').val(admin.role);
+                modal.find('#user').text(admin.user._id);
+            });
+            $('a[name=deleteButton]').on('click',function(event){
+                var admin = $(this).data('model'); 
+                if (confirm('确认删除不可恢复？')) {
+                    var url = '/tool/admin/'+admin._id;
+                    $.ajax({
+                        url:url,
+                        type:'DELETE',
+                        success:function(response) {
+                            location=location;
+                        }
+                    });
+                }
+            });

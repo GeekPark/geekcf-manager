@@ -43,10 +43,10 @@ table.table.table-bordered.table-hover
                     span #{order.payType}
                 td(nowrap="nowrap")
                     if order.state === 0
-                        a(href='#' data-toggle="modal" data-target="#chckOrderModel" data-whatever=order) 通过
+                        a(href='#' data-toggle="modal" data-target="#chckOrderModel" data-model=order) 通过
                         a(href='javascript:void(0)' onclick="changeState('#{order._id}',3,0,null,null)") 拒绝
                     if order.state === 2
-                        a(href='#' data-toggle="modal" data-target="#transferModel" data-whatever=order) 通过银行转账付款
+                        a(href='#' data-toggle="modal" data-target="#transferModel" data-model=order) 通过银行转账付款
                         a(href='javascript:void(0)' onclick="changeState('#{order._id}',4,0,null,null)") 放弃
                     a(href='/order/#{order._id}/delete') 删除
 
@@ -131,13 +131,13 @@ table.table.table-bordered.table-hover
         }
 
         $('#chckOrderModel').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var order = button.data('whatever') 
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var order = button.data('model'); 
             if(order.planAmount == 0){
                 order.planAmount = order.amount;
             }
             //不写ajax了
-            var modal = $(this)
+            var modal = $(this);
             modal.find('#realname').text(order.user.realname);
             modal.find('#planAmount').text(order.planAmount);
             modal.find('#amount').val(order.amount);
@@ -159,10 +159,10 @@ table.table.table-bordered.table-hover
         });
 
         $('#transferModel').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var order = button.data('whatever') 
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var order = button.data('model'); 
 
-            var modal = $(this)
+            var modal = $(this);
             modal.find('#realname').text(order.user.realname);
             modal.find('#payId').text('');
             modal.find('#bankType').text('');
@@ -191,4 +191,3 @@ table.table.table-bordered.table-hover
             }
 
         });
-
