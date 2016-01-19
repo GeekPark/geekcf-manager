@@ -18,17 +18,8 @@ html(lang='en')
       .container
         .collapse.navbar-collapse
             ul.nav.navbar-nav
-                if admin.role >= 0
-                    li(role="presentation" )
-                        a(href='/') 首页
-                    li(role="presentation" )
-                        a(href='/text') 静态文本
-                    li(role="presentation" )
-                        a(href='/applying') 申请资料
-                    li(role="presentation" )
-                        a(href='/data') 数据
-                    li(role="presentation" )
-                        a(href='/invite') 邀请码    
+                li(role="presentation" )
+                    a(href='/') 首页
                 if admin.role === 1
                     li(role="presentation" )
                       a(href='/project') 项目
@@ -38,6 +29,15 @@ html(lang='en')
                       a(href='/merUser') 联动优势用户 
                     li(role="presentation" )
                       a(href='/tool') 工具
+                if admin.role >= 0
+                    li(role="presentation" )
+                        a(href='/text') 静态文本
+                    li(role="presentation" )
+                        a(href='/applying') 申请资料
+                    li(role="presentation" )
+                        a(href='/data') 数据
+                    li(role="presentation" )
+                        a(href='/invite') 邀请码    
     .bs-docs-header
       .container
         h1 Manager
