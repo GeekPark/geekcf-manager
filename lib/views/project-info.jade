@@ -80,6 +80,9 @@ block content
             label(for='owner') 项目所属人：
             input#owner(name='owner',size=30,value='#{project.owner || ""}')
         p
+            label(for='keyWord') 关键词:
+            input#keyWord(name='keyWord',size=30,value='#{project.keyWord || ""}')
+        p
             label(for='intro') 一句话介绍：
         p
             textarea#intro(name='intro',cols=50,rows=10)= project.intro
