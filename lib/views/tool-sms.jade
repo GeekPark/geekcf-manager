@@ -4,9 +4,9 @@ block content
     h2 发送短信
     form(method='POST')
         p 选择群组：
-            input#investor(name='investor',type='checkbox')
+            input#investor(name='investor',type='radio' value="true")
             label(for='investor') 投资人
-            input#notInvestor(name='notInvestor',type='checkbox')
+            input#notInvestor(name='investor',type='radio' value="false")
             label(for='notInvestor') 非投资人
         p
             label(for='testMobile') 测试手机号：
@@ -31,4 +31,3 @@ block content
         p
             input(type='submit',value='SEND')
             a(href='/tool') CANCEL
-
