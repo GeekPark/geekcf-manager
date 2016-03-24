@@ -36,6 +36,9 @@ block content
                                 label(for='alias') 别名：
                                 input#alias(name='alias').form-control
                             .form-group
+                                label(for='projectProperty') 地区：
+                                input#projectProperty(name='projectProperty',value='#{project.projectProperty}')
+                            .form-group
                                 label(for='turn') 融资轮次：
                                 select#turn(name='turn').form-control
                                     each value, index in turns
@@ -56,9 +59,6 @@ block content
                             .form-group
                                 label(for='maxTarget') 最大额度：
                                 input#maxTarget(type='number',name='maxTarget').form-control
-                            .form-group
-                                label(for='readyDate') 预认购时间：
-                                input#readyDate(type='date',name='readyDate').form-control
                             .form-group
                                 label(for='openDate') 认购时间：
                                 input#openDate(name='openDate',type='date').form-control
