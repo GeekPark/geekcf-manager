@@ -21,6 +21,9 @@ block content
                 label(for='address_#{activity._id}') 地址：
                 input(id='address_#{activity._id}',size=50,name='address',value='#{activity.address}')
             p
+                label(for='beginDate_#{activity._id}') 活动时间：
+                input(id='beginDate_#{activity._id}',size=50,name='beginDate',value='#{format(activity.beginDate, "YYYY-MM-DD")}',type="date")
+            p
                 label(for='maxNums_#{activity._id}') 人数：
                 input(id='maxNums_#{activity._id}',size=5,type='number',name='maxNums',value='#{activity.maxNums}')
             p
@@ -50,6 +53,9 @@ block content
         p
             label(for='address_new') 地址：
             input(id='address_new',size=50,name='address')
+        p
+            label(for='beginDate_new')活动时间：
+            input(id='beginDate_new',size=50,name='beginDate',type="date")
         p
             label(for='maxNums_new') 人数：
             input(id='maxNums_new',size=5,type='number',name='maxNums')
