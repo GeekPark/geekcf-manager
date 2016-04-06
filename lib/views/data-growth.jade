@@ -1,0 +1,59 @@
+extends _layout
+
+block content
+    script(src='/echarts.common.min.js')
+    h2 数据
+    include data-menu
+    +showNav('growthStatistics')
+    form(class="form-inline",)
+        .form-group
+            
+            input(type='date',name='startDate',value='#{format(startDate, "YYYY-MM-DD")}',style='margin-right:3px')
+            input(type='date',name='endDate',value='#{format(endDate, "YYYY-MM-DD")}',style='margin-right:3px')
+            button(type="submit",class="btn btn-primary")
+                搜索
+    br
+    div#charts(style="width:1280px; height:600px;")
+    
+    script.
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('charts'));
+        var xAxis = JSON.parse('!{xAxis}');
+        var data = JSON.parse('!{data}');
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+               text: '用户增长统计'
+            },
+            tooltip: {},
+            legend: {
+                data:['用户数']
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: function (params) {
+                   console.log(params);
+                   params = params[0];
+                   var date = new Date(params.name);
+                   return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value;
+                },
+                axisPointer: {
+                   animation: false
+                }
+            },
+            xAxis: {
+                data: xAxis
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '100%']
+            },
+            series: [{
+                name: '用户数',
+                type: 'line',
+                data: data
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);

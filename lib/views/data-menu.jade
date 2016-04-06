@@ -1,0 +1,6 @@
+mixin showNav(cat)
+    ul.nav.nav-tabs
+        li(class= cat == 'users' && "active")
+            a(href="/data") 活跃用户
+        li(class= cat == 'growthStatistics' && "active")
+            a(href="/data/growthStatistics") 用户增长
