@@ -2,6 +2,9 @@ extends _layout
 
 block content
     h2 联动用户
+    include mer-menu
+    +showNav('users')
+    br
     form(class="form-inline",)
         .form-group
             input(name="q",class="form-control",value='#{q}',style='margin-right:3px')
