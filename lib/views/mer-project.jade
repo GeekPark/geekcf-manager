@@ -69,12 +69,37 @@ block content
                             h2 正在加载中请等待。。。
                         form#data
                             input(type="hidden" id="orderId")
-                            h3 标的余额
+                            h3 帐号余额
                             h4(id="balance")
                             h3 提现金额
                             input(id="amount",class = 'form-control')
                             h3 摘要
                             input(id="purpose",class = 'form-control')
+                            h3 短信通知手机
+                            input(id="mobile",class = 'form-control')
+                .modal-footer
+                    button(type="button" class="btn btn-default" data-dismiss="modal") 关闭
+                    button(type="button" id="passWithdraw" class="btn btn-primary") 提交
+    
+    div(class="modal fade " id="addModel" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title") 新增
+                    .modal-body
+                        div#loading
+                            h2 正在加载中请等待。。。
+                        form#data
+                            h3 项目别名
+                            h4(id="alias",class = 'form-control')
+                            h3 标的id
+                            input(id="projectId", class = 'form-control')
+                            h3 标的名称
+                            input(id="projectName",class = 'form-control')
+                            h3 标的金额
+                            input(id="projectAmount",class = 'form-control')
                 .modal-footer
                     button(type="button" class="btn btn-default" data-dismiss="modal") 关闭
                     button(type="button" id="passWithdraw" class="btn btn-primary") 提交
@@ -108,7 +133,6 @@ block content
             var body = {};
             body.amount = model.find('#amount').val();
             body.merProjectId = model.find('#merProjectId').val();
-            var reg = new RegExp("^\d+(\.\d{2})?$");
 
             if (isNaN(body.amount)) {
                 alert('转账金额，请输入数字!');
@@ -146,7 +170,7 @@ block content
             var body = {};
             body.amount = model.find('#amount').val();
             body.purpose = model.find('#purpose').val();
-            var reg = new RegExp("^\d+(\.\d{2})?$");
+            body.mobile = model.find('#mobile').val();
 
             if (isNaN(body.amount)) {
                 alert('转账金额，请输入数字!');
@@ -154,7 +178,10 @@ block content
             } else if(body.purpose.trim().length<=0){
                 alert('摘要为必填');
                 return
-            } else {
+            }  else if(isNaN(body.mobile)){
+                alert('手机号码，请输入数字!');
+                return
+            }  else {
                 $.post('/mer/withdraw',body)
                     .done(function( data ) {
                         alert(data.ret_msg);
