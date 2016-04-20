@@ -10,7 +10,8 @@ table.table.table-bordered.table-hover
             th(nowrap="nowrap") 实际认购金额
             th(nowrap="nowrap") 订单状态
             th(nowrap="nowrap") 付款类型
-            th(nowrap="nowrap") 操作
+            if admin.role === 1
+                th(nowrap="nowrap") 操作
         each order, index in orders
             tr
                 td= order._id
@@ -41,14 +42,15 @@ table.table.table-bordered.table-hover
                         span 退款
                 td(nowrap="nowrap")
                     span #{order.payType}
-                td(nowrap="nowrap")
-                    if order.state === 0
-                        a(href='#' data-toggle="modal" data-target="#chckOrderModel" data-model=order) 通过
-                        a(href='javascript:void(0)' onclick="changeState('#{order._id}',3,0,null,null)") 拒绝
-                    if order.state === 2
-                        a(href='#' data-toggle="modal" data-target="#transferModel" data-model=order) 通过银行转账付款
-                        a(href='javascript:void(0)' onclick="changeState('#{order._id}',4,0,null,null)") 放弃
-                    a(href='/order/#{order._id}/delete') 删除
+                if admin.role === 1
+                    td(nowrap="nowrap")
+                        if order.state === 0
+                            a(href='#' data-toggle="modal" data-target="#chckOrderModel" data-model=order) 通过
+                            a(href='javascript:void(0)' onclick="changeState('#{order._id}',3,0,null,null)") 拒绝
+                        if order.state === 2
+                            a(href='#' data-toggle="modal" data-target="#transferModel" data-model=order) 通过银行转账付款
+                            a(href='javascript:void(0)' onclick="changeState('#{order._id}',4,0,null,null)") 放弃
+                        a(href='/order/#{order._id}/delete') 删除
 
     div(class="modal fade " id="transferModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel")
         div(class="modal-dialog" role="document")

@@ -22,20 +22,20 @@ html(lang='en')
                     a(href='/') 首页
                 if admin.role === 1
                     li(role="presentation" )
+                      a(href='/mer') 联动优势 
+                if admin.role >= 0
+                    li(role="presentation" )
                       a(href='/project') 项目
                     li(role="presentation" )
                       a(href='/user') 用户
-                    li(role="presentation" )
-                      a(href='/mer') 联动优势 
-                    li(role="presentation" )
-                      a(href='/tool') 工具
-                if admin.role >= 0
                     li(role="presentation" )
                         a(href='/text') 静态文本
                     li(role="presentation" )
                         a(href='/applying') 申请资料
                     li(role="presentation" )
                         a(href='/data') 数据
+                    li(role="presentation" )
+                          a(href='/tool') 工具
                     li(role="presentation" )
                         a(href='/invite') 邀请码    
     .bs-docs-header

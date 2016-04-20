@@ -3,11 +3,13 @@ extends _layout
 block content
     h2 项目
     p
-        a(href='/project/new') 添加新项目
+        if admin.role === 1
+            a(href='/project/new') 添加新项目
         a(href='/mysterious') 神秘项目图片管理
         ol
             each project, index in projects.length ? projects : ['nothing...']
-                li
-                    a(href='/project/#{project._id}/info') EDIT
+                li  
+                    if admin.role === 1
+                        a(href='/project/#{project._id}/info') EDIT
                     a(href='/project/#{project._id}/orders') ORDERS
                     strong= project.title || project

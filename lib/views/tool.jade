@@ -3,8 +3,9 @@ extends _layout
 block content
     h2 工具
     ul.nav
-        li
-            a(href='/tool/admin') 管理员
+        if admin.role === 1
+            li
+                a(href='/tool/admin') 管理员
         li
             a(href='/tool/sms') 发送短信
         li
