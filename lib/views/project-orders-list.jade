@@ -28,8 +28,6 @@ table.table.table-bordered.table-hover
                         span #{order.planAmount}
 
                 td.num= order.amount
-                td=order.bankType
-                td=order.payId
                 td(nowrap="nowrap")
                     if order.state === 0
                         span 意向
@@ -45,6 +43,8 @@ table.table.table-bordered.table-hover
                         span 退款
                 td(nowrap="nowrap")
                     span #{order.payType}
+                td=order.bankType
+                td=order.payId
                 td(nowrap="nowrap")
                     if order.state === 0
                         a(href='#' data-toggle="modal" data-target="#chckOrderModel" data-model=order) 通过
