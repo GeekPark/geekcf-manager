@@ -10,6 +10,8 @@ table.table.table-bordered.table-hover
             th(nowrap="nowrap") 实际认购金额
             th(nowrap="nowrap") 订单状态
             th(nowrap="nowrap") 付款类型
+            th(nowrap="nowrap") 付款银行
+            th(nowrap="nowrap") 流水号
             th(nowrap="nowrap") 操作
         each order, index in orders
             tr
@@ -26,6 +28,8 @@ table.table.table-bordered.table-hover
                         span #{order.planAmount}
 
                 td.num= order.amount
+                td=order.bankType
+                td=order.payId
                 td(nowrap="nowrap")
                     if order.state === 0
                         span 意向
