@@ -10,8 +10,6 @@ table.table.table-bordered.table-hover
             th(nowrap="nowrap") 实际认购金额
             th(nowrap="nowrap") 订单状态
             th(nowrap="nowrap") 付款类型
-            th(nowrap="nowrap") 付款银行
-            th(nowrap="nowrap") 流水号
             th(nowrap="nowrap") 操作
         each order, index in orders
             tr
@@ -43,8 +41,6 @@ table.table.table-bordered.table-hover
                         span 退款
                 td(nowrap="nowrap")
                     span #{order.payType}
-                td=order.bankType
-                td=order.payId
                 td(nowrap="nowrap")
                     if order.state === 0
                         a(href='#' data-toggle="modal" data-target="#chckOrderModel" data-model=order) 通过
