@@ -21,6 +21,22 @@ block content
                                 label(for='title') 项目标题：
                                 input#title(name='title').form-control
                             .form-group
+                                label 项目类型：
+                                input(
+                                    id='category1'
+                                    name='category'
+                                    type='checkbox'
+                                    value='1'
+                                )
+                                label(for='category1') 众筹
+                                input(
+                                    id='category2'
+                                    name='category'
+                                    type='checkbox'
+                                    value='2'
+                                )
+                                label(for='category2') 众智
+                            .form-group
                                 label(for='icon') 项目图标：
                                 input#icon(name='icon', size=50).form-control
                             .form-group
