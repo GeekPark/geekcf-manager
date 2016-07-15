@@ -12,4 +12,5 @@ block content
                     if admin.role === 1
                         a(href='/project/#{project._id}/info') EDIT
                     a(href='/project/#{project._id}/orders') ORDERS
+                    em= project.category.indexOf(2) !== -1 ? "🚀 " : ""
                     strong= project.title || project

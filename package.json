@@ -1,33 +1,36 @@
 {
-  "name": "geekcf-manager",
-  "version": "0.1.0",
-  "description": "qlist manager",
-  "private": true,
-  "dependencies": {
-    "body-parser": "^1.12.2",
-    "compression": "^1.3.0",
-    "connect-multiparty": "^1.2.5",
-    "cookie-parser": "^1.3.4",
-    "csv": "^0.4.5",
-    "excel4node": "^0.2.19",
-    "express": "^4.12.3",
-    "jade": "^1.9.2",
-    "log4js": "^0.6.26",
-    "q": "^1.4.1",
-    "moment": "^2.8.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/GeekPark/geekcf-manager.git"
-  },
-  "bugs": {
-    "url": "https://github.com/GeekPark/geekcf-manager/issues"
-  },
-  "homepage": "https://github.com/GeekPark/geekcf-manager#readme",
-  "main": "manager.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Seven Yu",
-  "license": "ISC"
+    "name": "geekcf-manager",
+    "version": "0.1.0",
+    "description": "qlist manager",
+    "private": true,
+    "dependencies": {
+        "body-parser": "^1.15.2",
+        "compression": "^1.6.2",
+        "connect-multiparty": "^1.2.5",
+        "cookie-parser": "^1.4.3",
+        "csv": "^0.4.5",
+        "excel4node": "^0.2.23",
+        "express": "^4.14.0",
+        "jade": "^1.9.2",
+        "log4js": "^0.6.37",
+        "moment": "^2.14.1",
+        "q": "^1.4.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/GeekPark/geekcf-manager.git"
+    },
+    "bugs": {
+        "url": "https://github.com/GeekPark/geekcf-manager/issues"
+    },
+    "homepage": "https://github.com/GeekPark/geekcf-manager#readme",
+    "main": "manager.js",
+    "scripts": {
+        "start": "pm2 start manager.js -i 0",
+        "test": "pm2 start manager.js --watch",
+        "researt": "pm2 restart manager",
+        "stop": "pm2 stop manager"
+    },
+    "author": "Seven Yu",
+    "license": "ISC"
 }

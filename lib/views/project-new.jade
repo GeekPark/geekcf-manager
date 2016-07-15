@@ -22,20 +22,9 @@ block content
                                 input#title(name='title').form-control
                             .form-group
                                 label 项目类型：
-                                input(
-                                    id='category1'
-                                    name='category'
-                                    type='checkbox'
-                                    value='1'
-                                )
-                                label(for='category1') 众筹
-                                input(
-                                    id='category2'
-                                    name='category'
-                                    type='checkbox'
-                                    value='2'
-                                )
-                                label(for='category2') 众智
+                                each cat, key in category
+                                    input(id='cat#{key}',name='category',type='checkbox',value='#{key}')
+                                    label(for='cat#{key}')= cat
                             .form-group
                                 label(for='icon') 项目图标：
                                 input#icon(name='icon', size=50).form-control
