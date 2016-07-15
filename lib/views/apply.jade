@@ -45,7 +45,7 @@ block content
             var data = button.data('model'); 
             var content = data.content
             //不写ajax了
-            var modal = $('#content');
+            var modal = $('#content').html('');
             for(var key in content) {
                 modal.append('<p><strong>' + key + ':</strong> ' + content[key] + '</p>');
             }
