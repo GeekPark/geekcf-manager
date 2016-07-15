@@ -5,28 +5,23 @@ block content
         h3 申请资料
     table.table.table-bordered.table-hover
         tr
-            th ID
             th 项目名称
             th 公司名称
             th 公司邮箱
-            th 公司网址
             th 联系人姓名
             th 联系电话
             th 操作
         each data in list
             tr
+                td #{data.content.公司品牌}
+                td #{data.user.company}
+                td #{data.user.email}
+                td #{data.user.realname}
+                td #{data.user.mobile}
                 td 
-                    a(href='') #{data._id}
-                td #{data.projectName}
-                td #{data.companyName}
-                td #{data.companyEmail}
-                td #{data.webSite}
-                td #{data.userName}
-                td #{data.phoneNumber}
-                td 
-                    a(href='#' data-toggle="modal" data-target="#dialogModel" data-model=data) 查看
+                    a(href='#' data-toggle="modal" data-target="#dialogModel" data-model=data.content) 查看
         tr
-            td(colspan='8',style='text-alin:right')
+            td(colspan='6',style='text-alin:right')
                 if hasPre
                     a(href='?current=#{parseInt(current)-1}') pre
                 if hasNext
@@ -56,7 +51,6 @@ block content
                             p(id='describe',style='word-break: break-all;')   
                             h3 附件
                             div(id='files1',style='word-break: break-all;')
-                            
                 .modal-footer
                     button(type="button" class="btn btn-default" data-dismiss="modal") close
                     button(type="button" id="certSubmit" class="btn btn-primary") submit
@@ -64,6 +58,7 @@ block content
         $('#dialogModel').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var data = button.data('model'); 
+            console.log(data);
             //不写ajax了
             var modal = $(this);
             modal.find('#projectName').text(data.projectName);
