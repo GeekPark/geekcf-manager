@@ -46,7 +46,7 @@ block content
             var content = data.content
             //不写ajax了
             var modal = $('#content');
-            for(var key in content) {¬
+            for(var key in content) {
                 modal.append('<p><strong>' + key + ':</strong> ' + content[key] + '</p>');¬
             }
             if (data.files) {
@@ -57,4 +57,3 @@ block content
                 $('#files1').html(files); 
             }
         });
-                                   
