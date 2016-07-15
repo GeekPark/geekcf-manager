@@ -36,10 +36,9 @@ block content
                         span(aria-hidden="true") &times;
                     h4(class="modal-title") 申请项目详情
                     .modal-body
-                        form
-                            div(id='content',style='word-break: break-all;')   
-                            strong 附件
-                            div(id='files1',style='word-break: break-all;')
+                        div(id='content',style='word-break: break-all;')   
+                        strong 附件
+                        div(id='files1',style='word-break: break-all;')
     script.
         $('#dialogModel').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
