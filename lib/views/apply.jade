@@ -19,7 +19,7 @@ block content
                 td #{data.user.realname}
                 td #{data.user.mobile}
                 td 
-                    a(href='#' data-toggle="modal" data-target="#dialogModel" data-model=data.content) 查看
+                    a(href='#' data-toggle="modal" data-target="#dialogModel" data-model=data) 查看
         tr
             td(colspan='6',style='text-alin:right')
                 if hasPre
@@ -37,35 +37,19 @@ block content
                     h4(class="modal-title") 申请项目详情
                     .modal-body
                         form
-                            h3 项目名称
-                            h4(id="projectName")
-                            h3 公司名称
-                            h4(id="companyName")
-                            h3 联系人姓名
-                            h4(id='userName')
-                            h3 联系电话
-                            h4(id='phoneNumber')
-                            h3 公司邮箱 
-                            h4(id='companyEmail')
-                            h3 简介
-                            p(id='describe',style='word-break: break-all;')   
-                            h3 附件
+                            div(id='content',style='word-break: break-all;')   
+                            strong 附件
                             div(id='files1',style='word-break: break-all;')
-                .modal-footer
-                    button(type="button" class="btn btn-default" data-dismiss="modal") close
-                    button(type="button" id="certSubmit" class="btn btn-primary") submit
     script.
         $('#dialogModel').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var data = button.data('model'); 
-            console.log(data);
+            var content = data.content
             //不写ajax了
-            var modal = $(this);
-            modal.find('#projectName').text(data.projectName);
-            modal.find('#companyName').text(data.companyName);
-            modal.find('#phoneNumber').text(data.phoneNumber);
-            modal.find('#companyEmail').text(data.companyEmail);
-            modal.find('#describe').text(data.describe);
+            var modal = $('#content');
+            for(var key in content) {¬
+                modal.append('<p><strong>' + key + ':</strong> ' + content[key] + '</p>');¬
+            }
             if (data.files) {
                 var files = '';
                 for(var i=0;i<data.files.length;i++){
