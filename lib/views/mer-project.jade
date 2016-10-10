@@ -177,10 +177,10 @@ block content
         });
         
         $('#passTransferP2P').on('click',function(evt){
-            var model = $('#transferModel');
+            var model = $('#transferP2PModel');
             var body = {};
             body.amount = model.find('#amount').val();
-            body.merProjectId = model.find('#merProjectId').val();
+            //- body.merProjectId = model.find('#merProjectId').val();
 
             if (isNaN(body.amount)) {
                 alert('转账金额，请输入数字!');
