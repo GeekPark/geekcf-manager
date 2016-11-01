@@ -9,6 +9,7 @@ var path = require('path'),
     ruleChecker = require('./lib/rule-checker'),
     rule = require('./lib/urlRule'),
     app = express();
+
 base.mongo.connect(base.config.mongo, function (err) {
     if (err) {
         console.error(err);
@@ -94,18 +95,21 @@ function start() {
                 }
             });
     });
+
     app.use(ruleChecker(rule));
-    app.use('/project', require('./lib/routers/project'));
-    app.use('/user', require('./lib/routers/user'));
-    app.use('/tool', require('./lib/routers/tool'));
-    app.use('/data', require('./lib/routers/data'));
-    app.use('/order', require('./lib/routers/order'));
-    app.use('/invite', require('./lib/routers/invite'));
-    app.use('/text', require('./lib/routers/staticText'));
-    app.use('/applying', require('./lib/routers/applyingData'));
-    app.use('/mer', require('./lib/routers/mer'));
-    app.use('/mysterious', require('./lib/routers/mysteriousImage'));
-    app.use('/*', require('./lib/routers/home'));
+
+    app.use('/applying',    require('./lib/routers/applyingData'));
+    app.use('/adviser',     require('./lib/routers/adviser'));
+    app.use('/data',        require('./lib/routers/data'));
+    app.use('/invite',      require('./lib/routers/invite'));
+    app.use('/mer',         require('./lib/routers/mer'));
+    app.use('/mysterious',  require('./lib/routers/mysteriousImage'));
+    app.use('/order',       require('./lib/routers/order'));
+    app.use('/project',     require('./lib/routers/project'));
+    app.use('/text',        require('./lib/routers/staticText'));
+    app.use('/tool',        require('./lib/routers/tool'));
+    app.use('/user',        require('./lib/routers/user'));
+    app.use('/*',           require('./lib/routers/home'));
 
 
     util.error('=========================================');
