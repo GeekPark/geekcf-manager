@@ -21,9 +21,9 @@ block content
                 td #{item.orderId}
                 td
                     if item.type === 1
-                        转出
+                        | 转出
                     else if item.type ===2
-                        提现
+                        | 提现
                 if item.bank
                     td #{item.bank.brname}
                     td #{item.bank.account}
