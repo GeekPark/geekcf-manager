@@ -42,19 +42,19 @@ function start() {
     app.use(function (req, res, next) {
         var token = req.signedCookies.t;
         var sum = 0;
+        var rootFolder = '/' + (req.url.split('/')[1] || '');
         base.Admin.find()
             .count()
             .then(function (count) {
                 sum = count;
                 if (count === 0) {
                     app.locals = {
-                        domain: req.headers.host.replace(
-                            'manager.',
-                            ''),
+                        domain: req.headers.host.replace('manager.', ''),
                         admin: {
                             'role': 1
                         },
-                        format: util.dateformat
+                        format: util.dateformat,
+                        rootFolder: rootFolder
                     };
                     throw 'not has admins';
                 } else {
@@ -65,12 +65,12 @@ function start() {
                 var ckuid = user && user.hasOwnProperty('_id') ?
                     user._id : user;
                 app.locals = {
-                    domain: req.headers.host.replace('manager.',
-                        ''),
+                    domain: req.headers.host.replace('manager.', ''),
                     isopen: base.isTrue(req.cookies.open),
                     format: util.dateformat,
                     token: token,
-                    ckuid: ckuid
+                    ckuid: ckuid,
+                    rootFolder: rootFolder
                 };
 
                 global.uid = ckuid;
@@ -81,8 +81,7 @@ function start() {
                     app.locals.admin = admin;
                     next();
                 } else {
-                    res.redirect('http://' + app.locals
-                        .domain);
+                    res.redirect('http://' + app.locals.domain);
                 }
             })
             .then(undefined, function (err) {
@@ -90,8 +89,7 @@ function start() {
                 if (sum === 0) {
                     next();
                 } else {
-                    res.redirect('http://' + app.locals
-                        .domain);
+                    res.redirect('http://' + app.locals.domain);
                 }
             });
     });
