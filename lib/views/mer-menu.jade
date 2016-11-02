@@ -1,8 +1,9 @@
 mixin showNav(cat)
-    ul.nav.nav-tabs
-        li(class= cat == 'users' && "active")
-            a(href="/mer") 用户列表
-        li(class= cat == 'projects' && "active")
-            a(href="/mer/projects") 标的管理
-        li(class= cat == 'directbill' && "active")
-            a(href="/mer/directbill") 转账记录
+    p
+        ul.nav.nav-tabs
+            li(class= cat == 'users' && "active")
+                a(href="/mer") 用户列表
+            li(class= cat == 'projects' && "active")
+                a(href="/mer/projects") 标的管理
+            li(class= cat == 'directbill' && "active")
+                a(href="/mer/directbill") 转账记录

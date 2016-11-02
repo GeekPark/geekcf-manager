@@ -6,34 +6,35 @@ block content
     +showNav('directbill')
 
     table.table.table-bordered.table-hover
-        tr
-            th 订单号
-            th 类型
-            th 银行名称
-            th 帐号
-            th 账户名
-            th 项目id
-            th 金额
-            th 时间
-            th 状态
-        each item in list
-            tr 
-                td #{item.orderId}
-                td
-                    if item.type === 1
-                        | 转出
-                    else if item.type ===2
-                        | 提现
-                if item.bank
-                    td #{item.bank.brname}
-                    td #{item.bank.account}
-                    td #{item.bank.userName}
-                else
+        thead
+            tr
+                th 订单号
+                th 类型
+                th 银行名称
+                th 帐号
+                th 账户名
+                th 项目id
+                th 金额
+                th 时间
+                th 状态
+        tbody
+            each item in list
+                tr
+                    td #{item.orderId}
                     td
-                    td
-                    td
-                td #{item.merProjectId}
-                td #{item.amount}
-                td #{item.merDate}
-                td #{item.isSucceed}
-        
+                        if item.type === 1
+                            | 转出
+                        else if item.type ===2
+                            | 提现
+                    if item.bank
+                        td #{item.bank.brname}
+                        td #{item.bank.account}
+                        td #{item.bank.userName}
+                    else
+                        td
+                        td
+                        td
+                    td #{item.merProjectId}
+                    td #{item.amount}
+                    td #{item.merDate}
+                    td #{item.isSucceed}
