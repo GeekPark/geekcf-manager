@@ -1,0 +1,41 @@
+extends _layout
+
+mixin inputItem(label, name, value, type='text')
+    .form-group
+        label.control-label.col-sm-2(for=name)= label
+        .col-sm-10
+            input.form-control(id=name,type=type,name=name,value="#{value || ''}")
+            
+mixin checkItem(label, name, checked)
+    .form-group
+        .col-sm-2
+        .col-sm-10
+            input(id=name,name=name,type="checkbox",checked=checked,value="1")
+            label(for=name)= label
+
+mixin makeCheckList(label, list, name, data, otherName, otherData)
+    .form-group
+        label.control-label.col-sm-2= label
+        .col-sm-10
+            for item, index in list
+                label.col-sm-2
+                    input(name=name,type="checkbox",checked=data.indexOf(item) !== -1,value=item)
+                    | #{item}
+            .col-sm-2
+                input.form-control(name=otherName,type='text',placeholder='其他',value=otherData)
+    
+block content
+    h2 顾问详情
+    form.form-horizontal(method="POST",action="/adviser/#{adviser._id || ''}")
+        +inputItem('姓名', 'realname', adviser.realname)
+        +inputItem('公司', 'company', adviser.company)
+        +inputItem('职位', 'position', adviser.position)
+        +inputItem('手机', 'mobile', adviser.mobile)
+        +inputItem('E-Mail', 'email', adviser.email)
+        +inputItem('微信号', 'wechat', adviser.wechat)
+        +inputItem('参加工作时间', 'workingDate', format(adviser.workingDate, 'YYYY-MM-DD'), 'date')
+        +checkItem('是否参加过咨询服务', 'handson', !!adviser.handson)
+        +makeCheckList('所属行业', plug.industries, 'industry', adviser.industry || [], 'otherIndustry', adviser.otherIndustry)
+        +makeCheckList('擅长领域', plug.goodAt, 'goodAt', adviser.goodAt || [], 'otherGoodAt', adviser.otherGoodAt)
+        button.btn.btn-primary(type="submit") Save
+        a.btn.btn-default(href="/adviser") Calcel
