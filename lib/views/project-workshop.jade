@@ -1,0 +1,32 @@
+extends _layout
+
+block content
+    h2 项目工作坊
+    include project-nav
+    p.btn-group
+        a.btn.btn-primary(href="/project/#{projectId}/workshop/new") 添加工作坊
+    table.table.table-bordered.table-hover
+        thead
+            tr
+                th 标题
+                th 时间
+                th 地点
+                th 类型
+                th 顾问报名人数
+                th 反馈数
+                th 互评数
+                th 状态
+                th 操作
+        tbody
+            each item in list
+                tr
+                    td #{item.title}
+                    td #{format(item.time, 'YYYY-MM-DD HH:mm')}
+                    td #{item.place}
+                    td #{item.category}
+                    td #{item.advisers.length}
+                    td #{item.feedback.length}
+                    td #{item.comments.length}
+                    td #{item.status == 0 ? 'CLOSED' : 'OPEN'}
+                    td
+                        a(href='/project/#{item.project}/workshop/#{item._id}') EDIT

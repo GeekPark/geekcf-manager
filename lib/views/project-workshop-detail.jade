@@ -1,0 +1,18 @@
+extends _layout
+
+include _formItem.jade
+    
+block content
+    include _editor
+    h2 工作坊详情
+    include project-nav
+    form.form-horizontal(method="POST",action="/project/#{projectId}/workshop/#{workshop._id || ''}")
+        +inputItem('标题', 'title', workshop.title)
+        +inputItem('描述', 'intro', workshop.intro)
+        +inputItem('时间', 'time', format(workshop.time, 'YYYY-MM-DDThh:mm:ss'), 'datetime-local')
+        +inputItem('地点', 'place', workshop.place)
+        +inputItem('类型', 'category', workshop.category)
+        +textareaItem('工作坊小结', 'summary', workshop.summary)
+        button.btn.btn-primary(type="submit") Save
+        a.btn.btn-default(href="/project/#{projectId}/workshop") Calcel
+    +createEditor('textarea')

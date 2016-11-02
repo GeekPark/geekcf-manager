@@ -1,16 +1,16 @@
 extends _layout
 
-include _formItem.jade
+include _formItem
     
 block content
-    include _editor.jade
+    include _editor
     h2 顾问详情
     form.form-horizontal(method="POST",action="/adviser/#{adviser._id || ''}")
         +inputItem('姓名', 'realname', adviser.realname)
         +inputItem('公司', 'company', adviser.company)
         +inputItem('职位', 'position', adviser.position)
         +inputItem('手机', 'mobile', adviser.mobile)
-        +inputItem('E-Mail', 'email', adviser.email)
+        +inputItem('E-Mail', 'email', adviser.email, 'email')
         +inputItem('微信号', 'wechat', adviser.wechat)
         +selectItem('顾问分类', 'category', plug.adviserCategories, adviser.category)
         +inputItem('参加工作时间', 'workingDate', format(adviser.workingDate, 'YYYY-MM-DD'), 'date')
