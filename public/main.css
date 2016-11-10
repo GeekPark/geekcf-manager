@@ -3,8 +3,8 @@ body, pre, input, textarea, label, select {
 }
 pre {
     font-family: monospace;
-    font-size: 10px;
-    line-height: 10px;
+    font-size: 14px;
+    line-height: 14px;
 }
 label {
     min-width: 90px;
@@ -23,12 +23,20 @@ a {
     padding: 3px;
     margin: 5px;
 }
+li > a {
+    margin: 0;
+}
 li {
     margin: 3px 0;
 }
 
 dt {
     margin-top: 10px;
+}
+h2:before {
+    content: "|";
+    padding: 0 15px 0 10px;
+    color: #ccc;
 }
 
 /* This button was generated using CSSButtonGenerator.com */
@@ -190,5 +198,3 @@ input[type="submit"]:active, input[type="button"]:active {
     font-weight: 300;
     line-height: 1.4;
 }
-
-

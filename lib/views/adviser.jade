@@ -1,0 +1,29 @@
+extends _layout
+
+block content
+    h2 顾问
+    p.btn-group
+        a.btn.btn-primary(href="/adviser/new") 添加顾问
+    table.table.table-bordered.table-hover
+        thead
+            tr
+                th 姓名
+                th 公司
+                th 职位
+                th 手机
+                th 邮箱
+                th 微信
+                th 分类
+                th 操作
+        tbody
+            each item in list
+                tr
+                    td #{item.realname}
+                    td #{item.company}
+                    td #{item.position}
+                    td #{item.mobile}
+                    td #{item.email}
+                    td #{item.wechat}
+                    td #{item.category}
+                    td
+                        a(href='/adviser/#{item._id}') EDIT

@@ -9,6 +9,7 @@ var path = require('path'),
     ruleChecker = require('./lib/rule-checker'),
     rule = require('./lib/urlRule'),
     app = express();
+
 base.mongo.connect(base.config.mongo, function (err) {
     if (err) {
         console.error(err);
@@ -41,19 +42,19 @@ function start() {
     app.use(function (req, res, next) {
         var token = req.signedCookies.t;
         var sum = 0;
+        var rootFolder = '/' + (req.url.split('/')[1] || '');
         base.Admin.find()
             .count()
             .then(function (count) {
                 sum = count;
                 if (count === 0) {
                     app.locals = {
-                        domain: req.headers.host.replace(
-                            'manager.',
-                            ''),
+                        domain: req.headers.host.replace('manager.', ''),
                         admin: {
                             'role': 1
                         },
-                        format: util.dateformat
+                        format: util.dateformat,
+                        rootFolder: rootFolder
                     };
                     throw 'not has admins';
                 } else {
@@ -64,12 +65,12 @@ function start() {
                 var ckuid = user && user.hasOwnProperty('_id') ?
                     user._id : user;
                 app.locals = {
-                    domain: req.headers.host.replace('manager.',
-                        ''),
+                    domain: req.headers.host.replace('manager.', ''),
                     isopen: base.isTrue(req.cookies.open),
                     format: util.dateformat,
                     token: token,
-                    ckuid: ckuid
+                    ckuid: ckuid,
+                    rootFolder: rootFolder
                 };
 
                 global.uid = ckuid;
@@ -80,8 +81,7 @@ function start() {
                     app.locals.admin = admin;
                     next();
                 } else {
-                    res.redirect('http://' + app.locals
-                        .domain);
+                    res.redirect('http://' + app.locals.domain);
                 }
             })
             .then(undefined, function (err) {
@@ -89,23 +89,25 @@ function start() {
                 if (sum === 0) {
                     next();
                 } else {
-                    res.redirect('http://' + app.locals
-                        .domain);
+                    res.redirect('http://' + app.locals.domain);
                 }
             });
     });
+
     app.use(ruleChecker(rule));
-    app.use('/project', require('./lib/routers/project'));
-    app.use('/user', require('./lib/routers/user'));
-    app.use('/tool', require('./lib/routers/tool'));
-    app.use('/data', require('./lib/routers/data'));
-    app.use('/order', require('./lib/routers/order'));
-    app.use('/invite', require('./lib/routers/invite'));
-    app.use('/text', require('./lib/routers/staticText'));
-    app.use('/applying', require('./lib/routers/applyingData'));
-    app.use('/mer', require('./lib/routers/mer'));
-    app.use('/mysterious', require('./lib/routers/mysteriousImage'));
-    app.use('/*', require('./lib/routers/home'));
+
+    app.use('/applying',    require('./lib/routers/applyingData'));
+    app.use('/adviser',     require('./lib/routers/adviser'));
+    app.use('/data',        require('./lib/routers/data'));
+    app.use('/invite',      require('./lib/routers/invite'));
+    app.use('/mer',         require('./lib/routers/mer'));
+    app.use('/mysterious',  require('./lib/routers/mysteriousImage'));
+    app.use('/order',       require('./lib/routers/order'));
+    app.use('/project',     require('./lib/routers/project'));
+    app.use('/text',        require('./lib/routers/staticText'));
+    app.use('/tool',        require('./lib/routers/tool'));
+    app.use('/user',        require('./lib/routers/user'));
+    app.use('/*',           require('./lib/routers/home'));
 
 
     util.error('=========================================');

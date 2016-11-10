@@ -1,0 +1,44 @@
+mixin inputItem(label, name, value, type='text')
+    .form-group
+        label.control-label.col-sm-2(for=name)= label
+        .col-sm-10
+            input.form-control(id=name,type=type,name=name,value="#{value || ''}")
+
+mixin textareaItem(label, name, value)
+    .form-group
+        label.control-label.col-sm-2(for=name)= label
+        .col-sm-10
+            textarea.form-control(id=name,name=name,value="#{value || ''}")= value
+
+mixin checkItem(label, name, checked)
+    .form-group
+        .col-sm-2
+        .col-sm-10
+            input(id=name,name=name,type="checkbox",checked=checked,value="1")
+            label(for=name)= label
+
+mixin makeCheckList(label, list, name, data, otherName, otherData)
+    .form-group
+        label.control-label.col-sm-2= label
+        .col-sm-10
+            for item, index in list
+                label.col-sm-2
+                    input(name=name,type="checkbox",checked=data.indexOf(item) !== -1,value=item)
+                    | #{item}
+            .col-sm-2
+                input.form-control(name=otherName,type='text',placeholder='其他',value=otherData)
+
+mixin selectItem(label, name, list, value)
+    .form-group
+        label.control-label.col-sm-2= label
+        .col-sm-10
+            select.form-control(id=name,name=name)
+                option(value='') 请选择
+                for item, index in list
+                    option(value=item,selected=value==item)= item
+
+mixin fileItem(label, name,value,accept)
+    .form-group
+        label.control-label.col-sm-2(for=name)= label
+        .col-sm-10
+            input(id=name,type='file',accept=accept,name=name,value="#{value || ''}")

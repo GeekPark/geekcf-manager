@@ -1,3 +1,7 @@
+mixin navItem(cat, text)
+    li(role="presentation",class="#{rootFolder == cat ? 'active' : ''}")
+        a(href='#{cat}')= text
+        
 doctype html
 html(lang='en')
   head
@@ -17,31 +21,19 @@ html(lang='en')
     header(class="navbar navbar-top bs-docs-nav")
       .container
         .collapse.navbar-collapse
-            ul.nav.navbar-nav
-                li(role="presentation" )
-                    a(href='/') 首页
+            ul.nav.nav-pills
+                +navItem('/', '首页')
                 if admin.role === 1
-                    li(role="presentation" )
-                      a(href='/mer') 联动优势 
+                    +navItem('/mer', '联动优势')
                 if admin.role >= 0
-                    li(role="presentation" )
-                      a(href='/project') 项目
-                    li(role="presentation" )
-                      a(href='/user') 用户
-                    li(role="presentation" )
-                        a(href='/text') 静态文本
-                    li(role="presentation" )
-                        a(href='/applying') 申请资料
-                    li(role="presentation" )
-                        a(href='/data') 数据
-                    li(role="presentation" )
-                          a(href='/tool') 工具
-                    li(role="presentation" )
-                        a(href='/invite') 邀请码    
-    .bs-docs-header
-      .container
-        h1 Manager
-        p - geeks.vc好用的不能再好用了
+                    +navItem('/project', '项目')
+                    +navItem('/user', '用户')
+                    +navItem('/adviser', '顾问')
+                    +navItem('/text', '静态文本')
+                    +navItem('/applying', '申请资料')
+                    +navItem('/data', '数据')
+                    +navItem('/tool', '工具')
+                    +navItem('/invite', '邀请码')
     #main.container-fluid
         block content
     p.copy
