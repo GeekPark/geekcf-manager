@@ -5,14 +5,15 @@ include _formItem
 block content
     include _editor
     h2 顾问详情
-    form.form-horizontal(method="POST",action="/adviser/#{adviser._id || ''}")
-        +inputItem('姓名', 'realname', adviser.realname)
-        +inputItem('公司', 'company', adviser.company)
-        +inputItem('职位', 'position', adviser.position)
-        +inputItem('手机', 'mobile', adviser.mobile)
-        +inputItem('E-Mail', 'email', adviser.email, 'email')
+    form.form-horizontal(method="POST",action="/adviser/#{adviser._id || ''}",enctype="multipart/form-data")
+        +fileItem ('头像','picture',adviser.picture,'image/*')
+        +inputItem('姓名', 'realname', adviser.realname || '')
+        +inputItem('公司', 'company', adviser.company || '')
+        +inputItem('职位', 'position', adviser.position || '')
+        +inputItem('手机', 'mobile', adviser.mobile || '')
+        +inputItem('E-Mail', 'email', adviser.email || '', 'email')
         +inputItem('微信号', 'wechat', adviser.wechat)
-        +selectItem('顾问分类', 'category', plug.adviserCategories, adviser.category)
+        +selectItem('顾问分类', 'category', plug.adviserCategories, adviser.category || '')
         +inputItem('参加工作时间', 'workingDate', format(adviser.workingDate, 'YYYY-MM-DD'), 'date')
         +checkItem('是否参加过咨询服务', 'handson', !!adviser.handson)
         +makeCheckList('所属行业', plug.industries, 'industry', adviser.industry || [], 'otherIndustry', adviser.otherIndustry)

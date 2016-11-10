@@ -36,3 +36,9 @@ mixin selectItem(label, name, list, value)
                 option(value='') 请选择
                 for item, index in list
                     option(value=item,selected=value==item)= item
+
+mixin fileItem(label, name,value,accept)
+    .form-group
+        label.control-label.col-sm-2(for=name)= label
+        .col-sm-10
+            input(id=name,type='file',accept=accept,name=name,value="#{value || ''}")
