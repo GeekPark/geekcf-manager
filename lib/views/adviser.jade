@@ -4,26 +4,44 @@ block content
     h2 顾问
     p.btn-group
         a.btn.btn-primary(href="/adviser/new") 添加顾问
-    table.table.table-bordered.table-hover
-        thead
-            tr
-                th 姓名
-                th 公司
-                th 职位
-                th 手机
-                th 邮箱
-                th 微信
-                th 分类
-                th 操作
-        tbody
-            each item in list
+    form
+        |申请
+        a(href='?t=0') 申请
+        a(href='?t=1') 通过
+        a(href='?t=2') 未通过
+        input#q(name='q',size=10,value='#{q || ""}',placeholder='关键字')
+        input(type='submit',value='Search')
+    p
+        table.table.table-bordered.table-hover
+            thead
                 tr
-                    td #{item.realname}
-                    td #{item.company}
-                    td #{item.position}
-                    td #{item.mobile}
-                    td #{item.email}
-                    td #{item.wechat}
-                    td #{item.category}
-                    td
-                        a(href='/adviser/#{item._id}') EDIT
+                    th 姓名
+                    th 公司
+                    th 职位
+                    th 手机
+                    th 邮箱
+                    th 微信
+                    th 分类
+                    th 状态
+                    th 操作
+            tbody
+                each item in list
+                    tr
+                        td #{item.realname}
+                        td #{item.company}
+                        td #{item.position}
+                        td #{item.mobile}
+                        td #{item.email}
+                        td #{item.wechat}
+                        td #{item.category}
+                        td
+                            if item.adviserState === 0
+                                span 申请
+                            else if item.adviserState === 1
+                                span 通过
+                            else
+                                span 未通过
+                        td
+                            a(href='/adviser/#{item._id}') EDIT
+                            a(href='/adviser/#{item._id}?changeType=1') 通过
+                            a(href='/adviser/#{item._id}?changeType=2') 不通过

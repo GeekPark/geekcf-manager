@@ -6,7 +6,7 @@ block content
     include _editor
     h2 顾问详情
     form.form-horizontal(method="POST",action="/adviser/#{adviser._id || ''}",enctype="multipart/form-data")
-        +fileItem ('头像','picture',adviser.picture,'image/*')
+        +fileItem ('头像','pictures',adviser.picture,'image/*','multiple')
         +inputItem('姓名', 'realname', adviser.realname || '')
         +inputItem('公司', 'company', adviser.company || '')
         +inputItem('职位', 'position', adviser.position || '')
