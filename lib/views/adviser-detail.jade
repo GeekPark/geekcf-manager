@@ -6,7 +6,11 @@ block content
     include _editor
     h2 顾问详情
     form.form-horizontal(method="POST",action="/adviser/#{adviser._id || ''}",enctype="multipart/form-data")
-        +fileItem ('头像','pictures',adviser.picture,'image/*','multiple')
+        +fileItem ('头像','pictures',adviser.pictures,'image/*','multiple')
+        if (adviser.pictures)
+            .col-sm-12
+                for pic in adviser.pictures
+                    img(src='#{pic}')
         +inputItem('姓名', 'realname', adviser.realname || '')
         +inputItem('公司', 'company', adviser.company || '')
         +inputItem('职位', 'position', adviser.position || '')
@@ -25,4 +29,4 @@ block content
         +textareaItem('所属行业和擅长领域介绍', 'goodAtIntro', adviser.goodAtIntro)
         button.btn.btn-primary(type="submit") Save
         a.btn.btn-default(href="/adviser") Calcel
-    +createEditor('textarea')
+    +createEditorByIds(['experience','helpScope','links'])
